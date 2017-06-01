@@ -1,4 +1,4 @@
-package develop.sanstorik.com.genetic_coursework;
+package develop.sanstorik.com.genetic_coursework.Genetic;
 
 public class GeneticAlgorythm {
     private final int INITIAL_POPULATION_COUNT = 10;
