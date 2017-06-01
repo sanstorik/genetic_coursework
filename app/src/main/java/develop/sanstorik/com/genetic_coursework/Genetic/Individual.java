@@ -1,33 +1,32 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
-import android.support.annotation.NonNull;
-
 import java.util.BitSet;
 import java.util.Random;
 
 class Individual {
-    static private class Chromosome{
-        static final float MIN_X = 0;
-        static final float MAX_X = 4;
-        private static final double STEP;
-        static final int GENES_SIZE = 16;
+    static final float MIN_X = 0;
+    static final float MAX_X = 4;
+    static final int GENES_SIZE = 16;
 
+    static private class Chromosome{
+        private static final double STEP;
         Random random;
         BitSet genes;
+
         static{
             STEP = ( Math.abs(MIN_X) + Math.abs(MAX_X) ) / Math.pow(2, GENES_SIZE);
         }
 
-        Chromosome(@NonNull BitSet genes){
-            this.genes = genes;
+        private Chromosome(BitSet genes){
+            this.genes = (BitSet)genes.clone();
             init();
         }
 
-        Chromosome(Chromosome chromosome){
-            this(chromosome.getGenes());
+        private Chromosome(Chromosome chromosome){
+            this.genes = chromosome.getGenes();
         }
 
-        Chromosome(){
+        private Chromosome(){
             this.genes = new BitSet(GENES_SIZE);
             init();
         }
@@ -72,16 +71,38 @@ class Individual {
         private int getRandomBitIndex(){
             return random.nextInt(GENES_SIZE);
         }
+
+        @Override public String toString() {
+            StringBuilder bits = new StringBuilder();
+
+            for(int i=0; i < genes.length(); i++)
+                if (genes.get(i))
+                    bits.append("1");
+                else
+                    bits.append("0");
+
+            return bits.toString();
+        }
     }
 
 
     private Chromosome chromosome;
 
-    Individual(Chromosome chromosome){
-        this.chromosome = chromosome;
+    Individual(BitSet genes){
+        this.chromosome = new Chromosome(genes);
     }
 
-    public Chromosome getChromosome() {
+    double getFunctionValue(){
+        double x = chromosome.getGenesValue();
+
+        return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
+    }
+
+    Chromosome getChromosome() {
         return chromosome;
+    }
+
+    @Override public String toString() {
+        return chromosome.toString();
     }
 }
