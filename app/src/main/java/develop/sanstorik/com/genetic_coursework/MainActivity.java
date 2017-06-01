@@ -2,6 +2,7 @@ package develop.sanstorik.com.genetic_coursework;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorythm;
 

@@ -17,12 +17,12 @@ public final class GeneticAlgorythm {
     }
 
     public void test(){
-        BitSet bitSet = new BitSet(Individual.GENES_SIZE);
+        boolean[] genes = new boolean[14];
 
-        bitSet.set(5);
-        bitSet.set(3);
+        for(int i=0; i < genes.length; i++)
+            genes[i] = true;
 
-        Individual individual = new Individual(bitSet);
+        Individual individual = new Individual(genes);
 
         Log.i("tag", individual.toString());
     }
