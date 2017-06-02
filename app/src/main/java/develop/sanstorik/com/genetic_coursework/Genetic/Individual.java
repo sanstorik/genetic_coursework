@@ -149,6 +149,9 @@ class Individual  implements  Comparable<Individual>{
 
 
     @Override public int compareTo(Individual second) {
+        if(second == null)
+            throw new IllegalArgumentException("compare to null");
+
         return Double.valueOf(second.getFunctionValue())
                 .compareTo(getFunctionValue());
     }

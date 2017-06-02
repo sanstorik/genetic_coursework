@@ -19,18 +19,20 @@ public class GeneticAlgorithm {
         currentPopulation = new Population();
     }
 
-    public void test(){
+    public void solve(){
         spawnInitialPopulation();
 
         for(Individual ind : currentPopulation)
             Log.i("tag", ind.toString());
 
-        mutationProcess(currentPopulation);
-        currentPopulation = reproductionProcess(currentPopulation);
+        for(int i=0; i < 25; i++) {
+            mutationProcess(currentPopulation);
+            currentPopulation = reproductionProcess(currentPopulation);
 
-        Log.i("tag", "  new selection ");
-        for (Individual ind : currentPopulation)
-            Log.i("tag", ind.toString());
+            Log.i("tag", "  new selection ");
+            for (Individual ind : currentPopulation)
+                Log.i("tag", ind.toString());
+        }
 
     }
 
