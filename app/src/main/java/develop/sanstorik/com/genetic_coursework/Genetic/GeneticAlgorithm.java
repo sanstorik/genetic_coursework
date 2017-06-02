@@ -2,35 +2,70 @@ package develop.sanstorik.com.genetic_coursework.Genetic;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class GeneticAlgorithm {
     private final int INITIAL_POPULATION_COUNT = 10;
     private final double ACCURACY = 6.1e-5;
+    private final double PERCENT_TO_DIE = 1e-1;
 
     private float breedingIndividualCount;
     private float mutationPossibility;
 
-    private Population initialPopulation;
+    private Population currentPopulation;
 
     private GeneticAlgorithm(){
-        initialPopulation = new Population();
+        currentPopulation = new Population();
     }
 
     public void test(){
-        boolean[] genes = new boolean[14];
-
-        for(int i=0; i < genes.length; i++)
-            genes[i] = true;
-
-        Individual individual = new Individual(genes);
-
         spawnInitialPopulation();
-        for(Individual ind : initialPopulation)
+
+        for(Individual ind : currentPopulation)
+            Log.i("tag", ind.toString());
+
+        mutationProcess();
+        currentPopulation = reproductionProcess();
+
+        Log.i("tag", "  ");
+        for(Individual ind : currentPopulation)
             Log.i("tag", ind.toString());
     }
 
     private void spawnInitialPopulation(){
         for(int i=0; i < INITIAL_POPULATION_COUNT; i++)
-            initialPopulation.add(spawnRandomIndividual());
+            currentPopulation.add(spawnRandomIndividual());
+    }
+
+    private void mutationProcess(){
+        for(Individual ind : currentPopulation)
+            if(Math.random() <= mutationPossibility)
+                ind.mutate();
+    }
+
+    private Population reproductionProcess(){
+        Population newPopulation = new Population();
+
+        for(int i=0; i < breedingIndividualCount; i++){
+            newPopulation.add(
+                    currentPopulation.getRandomIndividual()
+                    .crossover(currentPopulation.getRandomIndividual())
+            );
+        }
+
+        return newPopulation;
+    }
+
+    private Queue<Population> tournamentSelection(Population population){
+        Queue<Population> clusters = new LinkedList<>();
+
+        //int clustersCount = population.ge
+       // for(int i=0; i < )
+        //for(int i = 0; i < population.)
+
+        return clusters;
     }
 
     private Individual spawnRandomIndividual(){

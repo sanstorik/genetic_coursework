@@ -101,7 +101,10 @@ class Individual {
                 else
                     bits.append("0");
 
-            return bits.toString() + " size = " + genes.length;
+            bits.append(" | y = ");
+            bits.append(getGenesValue());
+
+            return bits.toString();
         }
     }
 
@@ -111,10 +114,22 @@ class Individual {
         this.chromosome = new Chromosome(genes.clone());
     }
 
+    Individual(Chromosome chromosome){
+        this.chromosome = new Chromosome(chromosome);
+    }
+
     double getFunctionValue(){
         double x = chromosome.getGenesValue();
 
         return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
+    }
+
+    void mutate(){
+        chromosome.mutate();
+    }
+
+    Individual crossover(Individual ind){
+        return new Individual(chromosome.crossover(ind.getChromosome()));
     }
 
     Chromosome getChromosome() {
