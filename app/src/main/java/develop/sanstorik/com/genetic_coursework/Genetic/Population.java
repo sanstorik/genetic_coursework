@@ -7,7 +7,7 @@ import java.util.Random;
 
 class Population implements Iterable<Individual>{
     private ArrayList<Individual> individuals;
-    Random random = new Random(47);
+    private Random random = new Random(47);
 
     Population(){
         individuals = new ArrayList<>(20);
@@ -27,11 +27,15 @@ class Population implements Iterable<Individual>{
         individuals.add(ind);
     }
 
+    int size(){
+        return individuals.size();
+    }
+
     Individual getRandomIndividual(){
         return individuals.get( random.nextInt(individuals.size()) );
     }
 
-    private ArrayList<Individual> getIndividuals(){
+    ArrayList<Individual> getIndividuals(){
         return (ArrayList<Individual>)Collections.unmodifiableCollection(individuals);
     }
 

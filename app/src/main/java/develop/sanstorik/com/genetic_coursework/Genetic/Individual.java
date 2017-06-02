@@ -1,16 +1,18 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
+import java.util.Comparator;
 import java.util.Random;
 
-class Individual {
+class Individual  implements  Comparable<Individual>{
     private static final float MIN_X = 0;
     private static final float MAX_X = 4;
     static final int GENES_SIZE = 16;
 
     static private class Chromosome{
         private static final double STEP;
-        Random random;
-        boolean[] genes;
+        private Random random;
+        private boolean[] genes;
+        private double genesValue;
 
         static{
             STEP = ( Math.abs(MIN_X) + Math.abs(MAX_X) ) / Math.pow(2, GENES_SIZE);
@@ -32,7 +34,7 @@ class Individual {
         }
 
         //swap two bits
-        Chromosome mutate(){
+        private Chromosome mutate(){
             boolean[] tempGenes = genes.clone();
 
             int firstIndex = getRandomBitIndex();
@@ -70,6 +72,10 @@ class Individual {
         }
 
         double getGenesValue(){
+            return genesValue;
+        }
+
+        private double calculateGenesValue(){
             StringBuilder bits = new StringBuilder();
 
             for (boolean gene : genes)
@@ -85,6 +91,7 @@ class Individual {
 
         private void init(){
             random = new Random(47);
+            genesValue = calculateGenesValue();
         }
 
         private int getRandomBitIndex(){
@@ -118,23 +125,36 @@ class Individual {
         this.chromosome = new Chromosome(chromosome);
     }
 
+
     double getFunctionValue(){
         double x = chromosome.getGenesValue();
 
         return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
     }
 
+
     void mutate(){
         chromosome.mutate();
     }
+
 
     Individual crossover(Individual ind){
         return new Individual(chromosome.crossover(ind.getChromosome()));
     }
 
+
     Chromosome getChromosome() {
         return chromosome;
     }
+
+
+    @Override public int compareTo(Individual second) {
+        return Double.valueOf(getFunctionValue())
+                .compareTo(second.getFunctionValue());
+    }
+
+
+
 
     @Override public String toString() {
         return " ind with genes = " + chromosome.toString();

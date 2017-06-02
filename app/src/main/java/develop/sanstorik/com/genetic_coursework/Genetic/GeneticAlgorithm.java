@@ -3,16 +3,16 @@ package develop.sanstorik.com.genetic_coursework.Genetic;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class GeneticAlgorithm {
     private final int INITIAL_POPULATION_COUNT = 10;
     private final double ACCURACY = 6.1e-5;
-    private final double PERCENT_TO_DIE = 1e-1;
 
-    private float breedingIndividualCount;
-    private float mutationPossibility;
+    private int breedingIndividualCount = 20;
+    private float mutationPossibility = 0.1f;
 
     private Population currentPopulation;
 
@@ -27,11 +27,14 @@ public class GeneticAlgorithm {
             Log.i("tag", ind.toString());
 
         mutationProcess();
-        currentPopulation = reproductionProcess();
+       // currentPopulation = reproductionProcess();
+        tournamentSelection(currentPopulation);
 
-        Log.i("tag", "  ");
-        for(Individual ind : currentPopulation)
+            /*
+            Log.i("tag", "  ");
+            for(Individual ind : currentPopulation)
             Log.i("tag", ind.toString());
+            */
     }
 
     private void spawnInitialPopulation(){
@@ -58,12 +61,34 @@ public class GeneticAlgorithm {
         return newPopulation;
     }
 
-    private Queue<Population> tournamentSelection(Population population){
-        Queue<Population> clusters = new LinkedList<>();
+    private Population tournamentSelection(Population parents){
+        Population selection = new Population();
+        Queue<Population> clusters = dividePopulationIntoClusters(parents);
 
-        //int clustersCount = population.ge
-       // for(int i=0; i < )
-        //for(int i = 0; i < population.)
+        for(Population cluster : clusters)
+            selection.add(
+                    Collections.max(cluster.getIndividuals())
+            );
+
+        return selection;
+    }
+
+    private Queue<Population> dividePopulationIntoClusters(Population parents){
+        Queue<Population> clusters = new LinkedList<>();
+        clusters.add(new Population());
+
+        int individualsCount = 0;
+        final int individualsPerCluster = 3;
+
+        for(Individual ind : parents){
+            individualsCount++;
+
+            clusters.peek().add(ind);
+            if(individualsCount % individualsPerCluster == 0)
+                clusters.add(new Population());
+        }
+
+        Log.i("tag", "size = " + String.valueOf(clusters.size()));
 
         return clusters;
     }
