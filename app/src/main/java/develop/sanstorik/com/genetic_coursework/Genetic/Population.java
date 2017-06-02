@@ -9,13 +9,15 @@ import java.util.Random;
 class Population implements Iterable<Individual>{
     private ArrayList<Individual> individuals;
     private Random random = new Random(47);
+    private Individual lastRandom;
 
     Population(){
-        individuals = new ArrayList<>(20);
+        individuals = new ArrayList<>(5);
     }
 
     Population(Population population){
-        individuals = new ArrayList<>(20);
+        individuals = new ArrayList<>(population.size() + 5);
+
         for(Individual ind : population.getIndividuals())
             this.individuals.add(new Individual(ind.getChromosome()));
     }
@@ -28,12 +30,25 @@ class Population implements Iterable<Individual>{
         individuals.add(ind);
     }
 
-    int size(){
+    private int size(){
         return individuals.size();
     }
 
+
+    /*
+    It compares random individual taken from previous random,
+    so there will be never two same random individuals in n > 1
+     */
     Individual getRandomIndividual(){
-        return individuals.get( random.nextInt(individuals.size()) );
+        Individual ind = individuals.get( random.nextInt(individuals.size()) );
+
+        if(lastRandom != null && ind == lastRandom && individuals.size() > 1)
+            while(ind == lastRandom)
+                ind = individuals.get( random.nextInt(individuals.size()) );
+
+        lastRandom = ind;
+
+        return ind;
     }
 
     Collection<Individual> getIndividuals(){

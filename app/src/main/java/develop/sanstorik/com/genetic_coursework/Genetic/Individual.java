@@ -1,6 +1,5 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
-import java.util.Comparator;
 import java.util.Random;
 
 class Individual  implements  Comparable<Individual>{

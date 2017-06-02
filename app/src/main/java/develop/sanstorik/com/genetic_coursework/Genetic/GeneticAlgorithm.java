@@ -10,13 +10,17 @@ import java.util.Queue;
 public class GeneticAlgorithm {
     private final double ACCURACY = 6.1e-5;
 
-    private int breedingIndividualCount = 15;
-    private float mutationPossibility = 0.1f;
+    private int breedingIndividualCount = 5;
+    private float mutationPossibility = 0.25f;
 
     private Population currentPopulation;
+    private Deque<Population> generations;
+    private Deque<Individual> bestIndividuals;
 
     private GeneticAlgorithm(){
         currentPopulation = new Population();
+        generations = new LinkedList<>();
+        bestIndividuals = new LinkedList<>();
     }
 
     public void solve(){
@@ -25,13 +29,18 @@ public class GeneticAlgorithm {
         for(Individual ind : currentPopulation)
             Log.i("tag", ind.toString());
 
-        for(int i=0; i < 25; i++) {
+        for(int i=0; i < 100; i++) {
             mutationProcess(currentPopulation);
             currentPopulation = reproductionProcess(currentPopulation);
 
             Log.i("tag", "  new selection ");
             for (Individual ind : currentPopulation)
                 Log.i("tag", ind.toString());
+
+            generations.offerLast(new Population(currentPopulation));
+            bestIndividuals.offerLast(Collections.max(currentPopulation.getIndividuals()));
+
+            Log.i("tag", "best = " + bestIndividuals.peekLast().toString());
         }
 
     }
@@ -105,6 +114,14 @@ public class GeneticAlgorithm {
             genes[i] = Math.random() < 0.5f;
 
         return new Individual(genes);
+    }
+
+    public void setBreedingIndividualCount(int breedingIndividualCount) {
+        this.breedingIndividualCount = breedingIndividualCount;
+    }
+
+    public void setMutationPossibility(float mutationPossibility) {
+        this.mutationPossibility = mutationPossibility;
     }
 
     public static GeneticAlgorithm newInstance(){
