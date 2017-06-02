@@ -149,8 +149,8 @@ class Individual  implements  Comparable<Individual>{
 
 
     @Override public int compareTo(Individual second) {
-        return Double.valueOf(getFunctionValue())
-                .compareTo(second.getFunctionValue());
+        return Double.valueOf(second.getFunctionValue())
+                .compareTo(getFunctionValue());
     }
 
 

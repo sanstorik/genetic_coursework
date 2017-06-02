@@ -2,16 +2,15 @@ package develop.sanstorik.com.genetic_coursework.Genetic;
 
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class GeneticAlgorithm {
-    private final int INITIAL_POPULATION_COUNT = 10;
     private final double ACCURACY = 6.1e-5;
 
-    private int breedingIndividualCount = 20;
+    private int breedingIndividualCount = 15;
     private float mutationPossibility = 0.1f;
 
     private Population currentPopulation;
@@ -26,39 +25,42 @@ public class GeneticAlgorithm {
         for(Individual ind : currentPopulation)
             Log.i("tag", ind.toString());
 
-        mutationProcess();
-       // currentPopulation = reproductionProcess();
-        tournamentSelection(currentPopulation);
+        mutationProcess(currentPopulation);
+        currentPopulation = reproductionProcess(currentPopulation);
 
-            /*
-            Log.i("tag", "  ");
-            for(Individual ind : currentPopulation)
+        Log.i("tag", "  new selection ");
+        for (Individual ind : currentPopulation)
             Log.i("tag", ind.toString());
-            */
+
     }
 
     private void spawnInitialPopulation(){
+        final int INITIAL_POPULATION_COUNT = 10;
+
         for(int i=0; i < INITIAL_POPULATION_COUNT; i++)
             currentPopulation.add(spawnRandomIndividual());
     }
 
-    private void mutationProcess(){
-        for(Individual ind : currentPopulation)
+    private void mutationProcess(Population population){
+        for(Individual ind : population)
             if(Math.random() <= mutationPossibility)
                 ind.mutate();
     }
 
-    private Population reproductionProcess(){
+    private Population reproductionProcess(Population parents){
         Population newPopulation = new Population();
 
         for(int i=0; i < breedingIndividualCount; i++){
             newPopulation.add(
-                    currentPopulation.getRandomIndividual()
-                    .crossover(currentPopulation.getRandomIndividual())
+                    parents.getRandomIndividual()
+                    .crossover(parents.getRandomIndividual())
             );
         }
 
-        return newPopulation;
+        for(Individual ind : parents)
+            newPopulation.add(ind);
+
+        return tournamentSelection(newPopulation);
     }
 
     private Population tournamentSelection(Population parents){
@@ -73,22 +75,23 @@ public class GeneticAlgorithm {
         return selection;
     }
 
-    private Queue<Population> dividePopulationIntoClusters(Population parents){
-        Queue<Population> clusters = new LinkedList<>();
-        clusters.add(new Population());
+    private Deque<Population> dividePopulationIntoClusters(Population parents){
+        Deque<Population> clusters = new LinkedList<>();
 
         int individualsCount = 0;
-        final int individualsPerCluster = 3;
+        final int individualsPerCluster = 2;
 
         for(Individual ind : parents){
+            if(individualsCount % individualsPerCluster == 0) {
+                clusters.offer(new Population());
+            }
+
             individualsCount++;
 
-            clusters.peek().add(ind);
-            if(individualsCount % individualsPerCluster == 0)
-                clusters.add(new Population());
+            clusters.peekLast().add(ind);
         }
 
-        Log.i("tag", "size = " + String.valueOf(clusters.size()));
+        Log.i("tag", ""+clusters.size());
 
         return clusters;
     }

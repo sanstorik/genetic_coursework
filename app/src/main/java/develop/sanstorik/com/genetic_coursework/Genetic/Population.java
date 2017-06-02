@@ -1,6 +1,7 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
@@ -35,8 +36,8 @@ class Population implements Iterable<Individual>{
         return individuals.get( random.nextInt(individuals.size()) );
     }
 
-    ArrayList<Individual> getIndividuals(){
-        return (ArrayList<Individual>)Collections.unmodifiableCollection(individuals);
+    Collection<Individual> getIndividuals(){
+        return Collections.unmodifiableCollection(individuals);
     }
 
     @Override public Iterator<Individual> iterator() {
