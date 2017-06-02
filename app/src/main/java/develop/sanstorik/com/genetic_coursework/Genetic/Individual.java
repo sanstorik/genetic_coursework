@@ -3,8 +3,8 @@ package develop.sanstorik.com.genetic_coursework.Genetic;
 import java.util.Random;
 
 class Individual {
-    static final float MIN_X = 0;
-    static final float MAX_X = 4;
+    private static final float MIN_X = 0;
+    private static final float MAX_X = 4;
     static final int GENES_SIZE = 16;
 
     static private class Chromosome{
@@ -17,12 +17,13 @@ class Individual {
         }
 
         private Chromosome(boolean[] genes){
-            this.genes = genes.clone();
+            this.genes = genes;
             init();
         }
 
         private Chromosome(Chromosome chromosome){
             this.genes = chromosome.getGenes();
+            init();
         }
 
         private Chromosome(){
@@ -42,11 +43,26 @@ class Individual {
             tempGenes[firstIndex] = secondBit;
             tempGenes[secondIndex] = firstBit;
 
-            return new Chromosome(getGenes());
+            return new Chromosome(getGenes().clone());
         }
 
+        /*
+        uniform crossover
+        if (rand(0,1) > final rand[0,1])
+        --- bit from first /else/ bit from second
+        */
         private Chromosome crossover(Chromosome secondParent){
-            return null;
+            final double trashHold = Math.random();
+            boolean[] childGenes = new boolean[GENES_SIZE];
+
+            for(int i=0; i < genes.length; i++){
+                if(Math.random() > trashHold)
+                    childGenes[i] = this.genes[i];
+                else
+                    childGenes[i] = secondParent.genes[i];
+            }
+
+            return new Chromosome(childGenes);
         }
 
         boolean[] getGenes() {
@@ -75,6 +91,7 @@ class Individual {
             return random.nextInt(GENES_SIZE);
         }
 
+
         @Override public String toString() {
             StringBuilder bits = new StringBuilder();
 
@@ -91,7 +108,7 @@ class Individual {
     private Chromosome chromosome;
 
     Individual(boolean[] genes){
-        this.chromosome = new Chromosome(genes);
+        this.chromosome = new Chromosome(genes.clone());
     }
 
     double getFunctionValue(){
@@ -105,6 +122,6 @@ class Individual {
     }
 
     @Override public String toString() {
-        return chromosome.toString();
+        return " ind with genes = " + chromosome.toString();
     }
 }
