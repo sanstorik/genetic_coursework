@@ -10,17 +10,20 @@ import java.util.Queue;
 public class GeneticAlgorithm {
     private final double ACCURACY = 6.1e-5;
 
-    private int breedingIndividualCount = 5;
-    private float mutationPossibility = 0.25f;
+    private final int breedingIndividualCount;
+    private final float mutationPossibility;
 
     private Population currentPopulation;
     private Deque<Population> generations;
     private Deque<Individual> bestIndividuals;
 
-    private GeneticAlgorithm(){
+    private GeneticAlgorithm(int breedingIndividualCount, float mutationPossibility){
         currentPopulation = new Population();
         generations = new LinkedList<>();
         bestIndividuals = new LinkedList<>();
+
+        this.breedingIndividualCount = breedingIndividualCount;
+        this.mutationPossibility = mutationPossibility;
     }
 
     public void solve(){
@@ -102,8 +105,6 @@ public class GeneticAlgorithm {
             clusters.peekLast().add(ind);
         }
 
-        Log.i("tag", ""+clusters.size());
-
         return clusters;
     }
 
@@ -116,15 +117,7 @@ public class GeneticAlgorithm {
         return new Individual(genes);
     }
 
-    public void setBreedingIndividualCount(int breedingIndividualCount) {
-        this.breedingIndividualCount = breedingIndividualCount;
-    }
-
-    public void setMutationPossibility(float mutationPossibility) {
-        this.mutationPossibility = mutationPossibility;
-    }
-
-    public static GeneticAlgorithm newInstance(){
-        return new GeneticAlgorithm();
+    public static GeneticAlgorithm newInstance(int breedingIndividualCount, float mutationPossibility){
+        return new GeneticAlgorithm(breedingIndividualCount, mutationPossibility);
     }
 }
