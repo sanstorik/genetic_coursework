@@ -15,12 +15,10 @@ public class InterruptionSource {
     }
 
     public static Interruptible createFunctionMaxValueSource(final double funcValue){
-        return (iteration, funcVal) ->
-                Math.abs(funcValue - funcVal) < ACCURACY || iteration > MAX_ITERATION;
+        return (iteration, funcVal) ->  funcVal >= funcValue || iteration > MAX_ITERATION;
     }
 
     public static Interruptible createFunctionMinValueSource(final double funcValue){
-        return (iteration, funcVal) ->
-                Math.abs(funcValue - funcVal) < ACCURACY || iteration > MAX_ITERATION;
+        return (iteration, funcVal) -> funcVal <= funcValue || iteration > MAX_ITERATION;
     }
 }

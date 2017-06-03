@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,34 @@ public class MainActivity extends AppCompatActivity {
 
         interruptValue = (TextView)findViewById(R.id.intSource_value);
         createInterruptionSourceSpinner();
+
+        findViewById(R.id.algo_button).setOnClickListener((event) -> startAlgorithm());
+        interruptionSource = InterruptionSource.createIterationSource(
+                Integer.valueOf(interruptValue.getText().toString()));
+    }
+
+    private void startAlgorithm(){
+        EditText mutability = (EditText) findViewById(R.id.mutability_et);
+        EditText breeding = (EditText) findViewById(R.id.breeding_et);
+
+        if (mutability.getText().toString().isEmpty()
+                || breeding.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        float mutabilityChance = Float.valueOf(mutability.getText().toString());
+        int breedingCount = Integer.valueOf(breeding.getText().toString());
+
+        if(dataIsCorrect(mutabilityChance, breedingCount))
+            GeneticAlgorithm.newInstance(breedingCount, mutabilityChance, interruptionSource).solve();
+        else
+            Toast.makeText(this, "Wrong input", Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean dataIsCorrect(double mutability, int breeding){
+        return (mutability > 0 && mutability < 1)
+                && (breeding > 0 && breeding < 1000);
     }
 
     private void createInterruptionSourceSpinner(){
