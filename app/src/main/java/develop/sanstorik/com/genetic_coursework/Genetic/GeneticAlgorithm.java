@@ -8,14 +8,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class GeneticAlgorithm {
-    private final double ACCURACY = 6.1e-5;
-
     private final int breedingIndividualCount;
     private final float mutationPossibility;
 
     private Population currentPopulation;
     private Deque<Population> generations;
     private Deque<Individual> bestIndividuals;
+    private InterruptionSource.Interruptible interruptionSource;
 
     private GeneticAlgorithm(int breedingIndividualCount, float mutationPossibility){
         currentPopulation = new Population();
@@ -24,15 +23,22 @@ public class GeneticAlgorithm {
 
         this.breedingIndividualCount = breedingIndividualCount;
         this.mutationPossibility = mutationPossibility;
+        this.interruptionSource = InterruptionSource.createIterationSource(100);
+    }
+
+    private GeneticAlgorithm(int breedingIndividualCount, float mutationPossibility,
+                             InterruptionSource.Interruptible interruptionSource){
+        this(breedingIndividualCount, mutationPossibility);
+        this.interruptionSource = interruptionSource;
     }
 
     public void solve(){
         spawnInitialPopulation();
+        bestIndividuals.offerLast(Collections.max(currentPopulation.getIndividuals()));
+        int iteration = 0;
 
-        for(Individual ind : currentPopulation)
-            Log.i("tag", ind.toString());
-
-        for(int i=0; i < 100; i++) {
+        Log.i("tag", "hui");
+        while(!interruptionSource.ended(iteration++, bestIndividuals.peekLast().getFunctionValue())){
             mutationProcess(currentPopulation);
             currentPopulation = reproductionProcess(currentPopulation);
 
@@ -43,9 +49,8 @@ public class GeneticAlgorithm {
             generations.offerLast(new Population(currentPopulation));
             bestIndividuals.offerLast(Collections.max(currentPopulation.getIndividuals()));
 
-            Log.i("tag", "best = " + bestIndividuals.peekLast().toString());
+            Log.i("tag", "iteration = " + iteration + " best = " + bestIndividuals.peekLast().toString());
         }
-
     }
 
     private void spawnInitialPopulation(){
@@ -119,5 +124,10 @@ public class GeneticAlgorithm {
 
     public static GeneticAlgorithm newInstance(int breedingIndividualCount, float mutationPossibility){
         return new GeneticAlgorithm(breedingIndividualCount, mutationPossibility);
+    }
+
+    public static GeneticAlgorithm newInstance(int breedingIndividualCount, float mutationPossibility,
+                                               InterruptionSource.Interruptible interruptionSource){
+        return new GeneticAlgorithm(breedingIndividualCount, mutationPossibility, interruptionSource);
     }
 }

@@ -17,12 +17,12 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/mutability_et"
         android:hint="Mutability"
         android:fontFamily="monospace"
         android:textStyle="normal|bold"
         android:textAlignment="viewStart"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/breeding_et"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 
@@ -30,15 +30,15 @@
         android:text="Find max y(x)"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
+        android:id="@+id/algo_button"
         android:layout_marginBottom="26dp"
         android:textSize="16sp"
         android:minHeight="56dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignStart="@+id/editText4"
-        android:layout_alignRight="@+id/editText4"
-        android:layout_alignEnd="@+id/editText4"
+        android:layout_alignLeft="@+id/mutability_et"
+        android:layout_alignStart="@+id/mutability_et"
+        android:layout_alignRight="@+id/mutability_et"
+        android:layout_alignEnd="@+id/mutability_et"
         android:background="@color/colorButtons"/>
 
     <EditText
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberSigned"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/breeding_et"
         android:hint="Breeding count"
         android:textAlignment="viewStart"
         android:fontFamily="monospace"
@@ -54,26 +54,29 @@
         android:width="150dp"
         android:layout_marginTop="100dp"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignStart="@+id/editText4"
+        android:layout_alignLeft="@+id/mutability_et"
+        android:layout_alignStart="@+id/mutability_et"
         android:paddingLeft="2dp"
-        android:layout_alignRight="@+id/editText4"
-        android:layout_alignEnd="@+id/editText4"
+        android:layout_alignRight="@+id/mutability_et"
+        android:layout_alignEnd="@+id/mutability_et"
         android:paddingRight="2dp"
         style="@style/Widget.AppCompat.EditText"
         android:selectAllOnFocus="true"/>
 
     <Spinner
+        android:id="@+id/intSource_spinner"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/intSource_spinner"
-        android:layout_above="@+id/button"
-        android:layout_marginBottom="73dp"
-        android:popupBackground="@color/colorDropItems"
+        android:layout_above="@+id/algo_button"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="73dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:theme="@style/Animation.AppCompat.DropDownUp"/>
 
     <TextView
         android:text="Interruption source"
@@ -90,4 +93,18 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:id="@+id/intSource_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
+        android:fontFamily="monospace"
+        android:text="25"
+        android:textAllCaps="true"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="25sp"/>
+
 </RelativeLayout>
