@@ -1,21 +1,25 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
-class GeneticResponse {
-    private Collection<Population> generations;
-    private Collection<Individual> bestIndividuals;
+public class GeneticResponse {
+    private ArrayList<Population> generations;
+    private ArrayList<Individual> bestIndividuals;
 
     GeneticResponse(Collection<Population> generations, Collection<Individual> bestIndividuals){
-        this.generations = generations;
-        this.bestIndividuals = bestIndividuals;
+        this.generations = new ArrayList<>(generations.size());
+        this.generations.addAll(generations);
+
+        this.bestIndividuals = new ArrayList<>(bestIndividuals.size());
+        this.bestIndividuals.addAll(bestIndividuals);
     }
 
-    public Population[] getGenerations(){
-        return (Population[])generations.toArray();
+    public ArrayList<Population> getGenerations(){
+        return generations;
     }
 
-    public Individual[] getBestIndividalsInEachGeneration(){
-        return (Individual[])bestIndividuals.toArray();
+    public ArrayList<Individual> getBestIndividalsInEachGeneration(){
+        return bestIndividuals;
     }
 }

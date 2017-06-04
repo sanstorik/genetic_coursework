@@ -19,6 +19,7 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
+import develop.sanstorik.com.genetic_coursework.Genetic.GeneticResponse;
 import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
         float mutabilityChance = Float.valueOf(mutability.getText().toString());
         int breedingCount = Integer.valueOf(breeding.getText().toString());
 
-        if(dataIsCorrect(mutabilityChance, breedingCount))
-            GeneticAlgorithm.newInstance(breedingCount, mutabilityChance, interruptionSource).solve();
+        if(dataIsCorrect(mutabilityChance, breedingCount)) {
+            GeneticResponse response = GeneticAlgorithm.newInstance(breedingCount, mutabilityChance, interruptionSource).solve();
+            fetchDataToListActivity(response);
+        }
         else
             Toast.makeText(this, "Wrong input", Toast.LENGTH_SHORT).show();
     }
@@ -63,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
     private boolean dataIsCorrect(double mutability, int breeding){
         return (mutability > 0 && mutability < 1)
                 && (breeding > 0 && breeding < 1000);
+    }
+
+    private void fetchDataToListActivity(GeneticResponse response){
+        Intent intent = new Intent(this, ListGeneticActivity.class);
+        intent.putParcelableArrayListExtra("bestInd", response.getBestIndividalsInEachGeneration());
+        intent.putParcelableArrayListExtra("generations", response.getGenerations());
+
+        startActivity(intent);
     }
 
     private void createInterruptionSourceSpinner(){

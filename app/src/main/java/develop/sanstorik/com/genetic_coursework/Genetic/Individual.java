@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.Random;
 
-class Individual implements Comparable<Individual>, Parcelable{
+public class Individual implements Comparable<Individual>, Parcelable{
     private static final float MIN_X = 0;
     private static final float MAX_X = 4;
     static final int GENES_SIZE = 16;
@@ -47,7 +47,7 @@ class Individual implements Comparable<Individual>, Parcelable{
             tempGenes[firstIndex] = secondBit;
             tempGenes[secondIndex] = firstBit;
 
-            return new Chromosome(getGenes().clone());
+            return new Chromosome(tempGenes);
         }
 
         /*
@@ -143,6 +143,7 @@ class Individual implements Comparable<Individual>, Parcelable{
                 };
 
         private Chromosome(Parcel in){
+            genes = new boolean[GENES_SIZE];
             in.readBooleanArray(genes);
             genesValue = in.readDouble();
         }
@@ -169,27 +170,22 @@ class Individual implements Comparable<Individual>, Parcelable{
         return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
     }
 
-
     void mutate(){
         chromosome.mutate();
     }
-
 
     Individual crossover(Individual ind){
         return new Individual(chromosome.crossover(ind.getChromosome()));
     }
 
-
     Chromosome getChromosome() {
         return chromosome;
     }
-
 
     @Override public int compareTo(Individual second) {
         return Double.valueOf(second.getFunctionValue())
                 .compareTo(getFunctionValue());
     }
-
 
     @Override public String toString() {
         return " ind with genes = " + chromosome.toString();

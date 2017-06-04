@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
-class Population implements Iterable<Individual>, Parcelable{
+public class Population implements Iterable<Individual>, Parcelable{
     private ArrayList<Individual> individuals;
     private Random random = new Random(47);
     private Individual lastRandom;
