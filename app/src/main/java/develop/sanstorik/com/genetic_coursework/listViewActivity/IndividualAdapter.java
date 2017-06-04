@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,8 +36,8 @@ class IndividualAdapter extends ArrayAdapter<Individual> {
         id.setText(String.valueOf(position + 1));
         if(individual != null) {
             bits.setText(individual.getBits());
-            xVal.setText(String.format(Locale.getDefault(), "x=%.3f", individual.getGenesValue()));
-            yVal.setText(String.format(Locale.getDefault(), "y=%.5f", individual.getFunctionValue()));
+            xVal.setText(String.format(Locale.getDefault(), "x=%.5f", individual.getGenesValue()));
+            yVal.setText(String.format(Locale.getDefault(), "y=%.7f", individual.getFunctionValue()));
         }
 
         return convertView;

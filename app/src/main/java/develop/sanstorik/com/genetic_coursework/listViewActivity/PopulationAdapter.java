@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,9 +16,9 @@ import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
 import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
 
-public class PopulationAdapter extends ArrayAdapter<Population> {
+class PopulationAdapter extends ArrayAdapter<Population> {
 
-    public PopulationAdapter(Context context, List<Population> data){
+    PopulationAdapter(Context context, List<Population> data){
         super(context, 0, data);
     }
 
@@ -29,7 +26,7 @@ public class PopulationAdapter extends ArrayAdapter<Population> {
         Population item = getItem(position);
 
         if(convertView == null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.support_simple_spinner_dropdown_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.population_list_item, parent, false);
 
         TextView id = (TextView)convertView.findViewById(R.id.id_tv);
         TextView sizeVal = (TextView)convertView.findViewById(R.id.size_tv);

@@ -6,4 +6,5 @@
     <color name="colorBackgroundMain">#877c7c</color>
     <color name="colorButtons">#cf608363</color>
     <color name="colorDropItems">#b9a281</color>
+    <color name="colorItemBest">#4693b4</color>
 </resources>

@@ -4,9 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 public class Population implements Iterable<Individual>, Parcelable{
@@ -58,8 +58,8 @@ public class Population implements Iterable<Individual>, Parcelable{
         return ind;
     }
 
-    Collection<Individual> getIndividuals(){
-        return Collections.unmodifiableCollection(individuals);
+    public List<Individual> getIndividuals(){
+        return Collections.unmodifiableList(individuals);
     }
 
     @Override public Iterator<Individual> iterator() {

@@ -1,7 +1,5 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
-import android.util.Log;
-
 import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -35,19 +33,16 @@ public class GeneticAlgorithm {
     public void solve(){
         spawnInitialPopulation();
         bestIndividuals.offerLast(Collections.max(currentPopulation.getIndividuals()));
+        generations.offerLast(new Population(currentPopulation));
+
         int iteration = 0;
 
         while(!interruptionSource.ended(iteration++, bestIndividuals.peekLast().getFunctionValue())){
             mutationProcess(currentPopulation);
             currentPopulation = reproductionProcess(currentPopulation);
 
-            for (Individual ind : currentPopulation)
-                Log.i("tag", ind.toString());
-
             generations.offerLast(new Population(currentPopulation));
             bestIndividuals.offerLast(Collections.max(currentPopulation.getIndividuals()));
-
-            Log.i("tag", "iteration = " + iteration + " best = " + bestIndividuals.peekLast().toString());
         }
 
         GeneticResponse.getInstance().initData(generations, bestIndividuals);

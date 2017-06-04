@@ -203,8 +203,7 @@ public class Individual implements Comparable<Individual>, Parcelable{
         return " ind with genes = " + chromosome.toString() + " y = " + getFunctionValue();
     }
 
-
-     /*
+    /*
     Implementing parceble to pass it to
     another activity in bundle.
      */

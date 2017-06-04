@@ -6,4 +6,7 @@
         <item name="android:windowBackground">@color/colorBackgroundMain</item>
     </style>
 
+    <style name="MyDialog" parent="Theme.AppCompat.Dialog.Alert">
+    </style>
+
 </resources>

@@ -1,18 +1,13 @@
 package develop.sanstorik.com.genetic_coursework.listViewActivity;
 
-import android.content.DialogInterface;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import java.util.ArrayList;
-import java.util.Deque;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticResponse;
 import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
@@ -45,6 +40,7 @@ public class ListGeneticActivity extends AppCompatActivity {
 
         fillListWithData();
         setRadioClickListeners();
+        registerListViewPopulationSelected();
     }
 
     private void fillListWithData(){
@@ -85,5 +81,23 @@ public class ListGeneticActivity extends AppCompatActivity {
 
         findViewById(R.id.radioGenerations).setOnClickListener(listener);
         findViewById(R.id.radioIndividuals).setOnClickListener(listener);
+    }
+
+    private void registerListViewPopulationSelected() {
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+                    if (currentDataType == DataType.GENERATIONS)
+                        startPopulationActivity((Population) parent.getItemAtPosition(position), position);
+                }
+        );
+    }
+
+    private void startPopulationActivity(Population population, int index){
+        Intent intent = new Intent(this, PopulationListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("population", population);
+        bundle.putInt("index", index + 1);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

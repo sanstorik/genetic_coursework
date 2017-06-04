@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     for example count of iterations to stop
      */
     private void alertDialogInterruptionSource(final int sourcePosition, final int previousPos){
-        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AppTheme)
+        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.MyDialog)
                 .setView(R.layout.intsource_dialog)
                 .setOnCancelListener((dialog)-> {
                     interruptSpinner.setSelection(previousPos);
