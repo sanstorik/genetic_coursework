@@ -1,12 +1,15 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
-class Population implements Iterable<Individual>{
+class Population implements Iterable<Individual>, Parcelable{
     private ArrayList<Individual> individuals;
     private Random random = new Random(47);
     private Individual lastRandom;
@@ -57,5 +60,35 @@ class Population implements Iterable<Individual>{
 
     @Override public Iterator<Individual> iterator() {
         return individuals.iterator();
+    }
+
+
+    /*
+    Implementing parceble to pass it to
+    another activity in bundle.
+     */
+
+    @Override public int describeContents() {
+        return 0;
+    }
+
+    @Override public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(individuals);
+    }
+
+    public static final Parcelable.Creator<Population> CREATOR =
+            new Parcelable.Creator<Population>(){
+                @Override public Population[] newArray(int size) {
+                    return new Population[size];
+                }
+
+                @Override public Population createFromParcel(Parcel source) {
+                    return new Population(source);
+                }
+            };
+
+
+    private Population(Parcel in){
+        in.readTypedList(individuals, Individual.CREATOR);
     }
 }

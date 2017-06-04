@@ -1,13 +1,16 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Random;
 
-class Individual  implements  Comparable<Individual>{
+class Individual implements Comparable<Individual>, Parcelable{
     private static final float MIN_X = 0;
     private static final float MAX_X = 4;
     static final int GENES_SIZE = 16;
 
-    static private class Chromosome{
+    static private class Chromosome implements Parcelable{
         private static final double STEP;
         private Random random;
         private boolean[] genes;
@@ -112,7 +115,42 @@ class Individual  implements  Comparable<Individual>{
 
             return bits.toString();
         }
+
+
+        /*
+          Implementing parceble to pass it to
+          another activity in bundle.
+        */
+
+        @Override public int describeContents() {
+            return 0;
+        }
+
+        @Override public void writeToParcel(Parcel dest, int flags) {
+            dest.writeBooleanArray(genes);
+            dest.writeDouble(genesValue);
+        }
+
+        public static final Parcelable.Creator<Chromosome> CREATOR =
+                new Parcelable.Creator<Chromosome>(){
+                    @Override public Chromosome[] newArray(int size) {
+                        return new Chromosome[size];
+                    }
+
+                    @Override public Chromosome createFromParcel(Parcel source) {
+                        return new Chromosome(source);
+                    }
+                };
+
+        private Chromosome(Parcel in){
+            in.readBooleanArray(genes);
+            genesValue = in.readDouble();
+        }
     }
+
+
+
+
 
     private Chromosome chromosome;
 
@@ -153,9 +191,37 @@ class Individual  implements  Comparable<Individual>{
     }
 
 
-
-
     @Override public String toString() {
         return " ind with genes = " + chromosome.toString();
+    }
+
+
+     /*
+    Implementing parceble to pass it to
+    another activity in bundle.
+     */
+
+
+    @Override public int describeContents() {
+        return 0;
+    }
+
+    @Override public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(chromosome, flags);
+    }
+
+    public static final Parcelable.Creator<Individual> CREATOR =
+            new Parcelable.Creator<Individual>(){
+                @Override public Individual[] newArray(int size) {
+                    return new Individual[size];
+                }
+
+                @Override public Individual createFromParcel(Parcel source) {
+                    return new Individual(source);
+                }
+            };
+
+    private Individual(Parcel in){
+        chromosome = in.readParcelable(Chromosome.class.getClassLoader());
     }
 }

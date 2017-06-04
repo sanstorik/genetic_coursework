@@ -32,17 +32,15 @@ public class GeneticAlgorithm {
         this.interruptionSource = interruptionSource;
     }
 
-    public void solve(){
+    public GeneticResponse solve(){
         spawnInitialPopulation();
         bestIndividuals.offerLast(Collections.max(currentPopulation.getIndividuals()));
         int iteration = 0;
 
-        Log.i("tag", "hui");
         while(!interruptionSource.ended(iteration++, bestIndividuals.peekLast().getFunctionValue())){
             mutationProcess(currentPopulation);
             currentPopulation = reproductionProcess(currentPopulation);
 
-            Log.i("tag", "  new selection ");
             for (Individual ind : currentPopulation)
                 Log.i("tag", ind.toString());
 
@@ -51,6 +49,8 @@ public class GeneticAlgorithm {
 
             Log.i("tag", "iteration = " + iteration + " best = " + bestIndividuals.peekLast().toString());
         }
+
+        return new GeneticResponse(generations, bestIndividuals);
     }
 
     private void spawnInitialPopulation(){

@@ -1,5 +1,6 @@
 package develop.sanstorik.com.genetic_coursework;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
 import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;
