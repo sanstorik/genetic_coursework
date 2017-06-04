@@ -104,14 +104,18 @@ public class Individual implements Comparable<Individual>, Parcelable{
         @Override public String toString() {
             StringBuilder bits = new StringBuilder();
 
-            for (boolean gene : genes)
+            int index = 0;
+            for (boolean gene : genes) {
+                index++;
+
                 if (gene)
                     bits.append("1");
                 else
                     bits.append("0");
 
-            bits.append(" | x = ");
-            bits.append(getGenesValue());
+                if(index % 4 == 0 && index != 0)
+                    bits.append(" ");
+            }
 
             return bits.toString();
         }
@@ -164,10 +168,22 @@ public class Individual implements Comparable<Individual>, Parcelable{
     }
 
 
-    double getFunctionValue(){
+    public double getFunctionValue(){
         double x = chromosome.getGenesValue();
 
         return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
+    }
+
+    public double getGenesValue(){
+        return chromosome.getGenesValue();
+    }
+
+    public String getBits(){
+        return chromosome.toString();
+    }
+
+    Chromosome getChromosome() {
+        return chromosome;
     }
 
     void mutate(){
@@ -176,10 +192,6 @@ public class Individual implements Comparable<Individual>, Parcelable{
 
     Individual crossover(Individual ind){
         return new Individual(chromosome.crossover(ind.getChromosome()));
-    }
-
-    Chromosome getChromosome() {
-        return chromosome;
     }
 
     @Override public int compareTo(Individual second) {

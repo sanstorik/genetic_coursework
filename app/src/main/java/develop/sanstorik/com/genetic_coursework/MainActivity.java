@@ -16,11 +16,9 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
-import develop.sanstorik.com.genetic_coursework.Genetic.GeneticResponse;
 import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;
+import develop.sanstorik.com.genetic_coursework.listViewActivity.ListGeneticActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -97,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     for example count of iterations to stop
      */
     private void alertDialogInterruptionSource(final int sourcePosition, final int previousPos){
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
+        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AppTheme)
                 .setView(R.layout.intsource_dialog)
                 .setOnCancelListener((dialog)-> {
                     interruptSpinner.setSelection(previousPos);

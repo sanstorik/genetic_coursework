@@ -38,12 +38,16 @@ public class GeneticAlgorithm {
         int iteration = 0;
 
         while(!interruptionSource.ended(iteration++, bestIndividuals.peekLast().getFunctionValue())){
-            Log.i("tag", String.valueOf(bestIndividuals.peekLast().toString()));
             mutationProcess(currentPopulation);
             currentPopulation = reproductionProcess(currentPopulation);
 
+            for (Individual ind : currentPopulation)
+                Log.i("tag", ind.toString());
+
             generations.offerLast(new Population(currentPopulation));
             bestIndividuals.offerLast(Collections.max(currentPopulation.getIndividuals()));
+
+            Log.i("tag", "iteration = " + iteration + " best = " + bestIndividuals.peekLast().toString());
         }
 
         GeneticResponse.getInstance().initData(generations, bestIndividuals);

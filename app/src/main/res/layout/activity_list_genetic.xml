@@ -7,14 +7,15 @@
               android:weightSum="1">
 
     <RadioGroup
-        android:id="@+id/radioGroup1"
+        android:id="@+id/showType_rb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioAndroid"
+            android:id="@+id/radioIndividuals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -23,11 +24,13 @@
             android:checked="true"
             android:gravity="center"
             android:padding="15dp"
-            android:text="Android"
-            android:textColor="@drawable/radiobutton_text"/>
+            android:text="Best individuals"
+            android:textAlignment="center"
+            android:textColor="@drawable/radiobutton_text"
+            android:textSize="17sp"/>
 
         <RadioButton
-            android:id="@+id/radioiPhone"
+            android:id="@+id/radioGenerations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,9 +38,18 @@
             android:button="@null"
             android:gravity="center"
             android:padding="15dp"
-            android:text="iPhone"
-            android:textColor="@drawable/radiobutton_text"/>
+            android:text="Generations"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@drawable/radiobutton_text"
+            android:textSize="17sp"/>
 
     </RadioGroup>
+
+    <ListView
+        android:id="@+id/dataList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="10dp"/>
 
 </LinearLayout>

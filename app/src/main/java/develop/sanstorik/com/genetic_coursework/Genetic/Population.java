@@ -33,8 +33,12 @@ public class Population implements Iterable<Individual>, Parcelable{
         individuals.add(ind);
     }
 
-    private int size(){
+    public int size(){
         return individuals.size();
+    }
+
+    public Individual getBestIndividual(){
+        return Collections.max(individuals);
     }
 
 

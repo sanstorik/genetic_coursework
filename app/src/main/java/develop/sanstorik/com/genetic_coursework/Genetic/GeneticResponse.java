@@ -2,26 +2,28 @@ package develop.sanstorik.com.genetic_coursework.Genetic;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Deque;
 
 public class GeneticResponse {
     private static GeneticResponse instance;
 
-    private Deque<Population> generations;
-    private Deque<Individual> bestIndividuals;
+    private ArrayList<Population> generations;
+    private ArrayList<Individual> bestIndividuals;
 
     private GeneticResponse(){}
 
-    void initData(Deque<Population> generations, Deque<Individual> bestIndividuals){
-        this.generations = generations;
-        this.bestIndividuals = bestIndividuals;
+    void initData(Collection<Population> generations, Collection<Individual> bestIndividuals){
+        this.generations = new ArrayList<>(generations.size());
+        this.generations.addAll(generations);
+
+        this.bestIndividuals = new ArrayList<>(bestIndividuals.size());
+        this.bestIndividuals.addAll(bestIndividuals);
     }
 
-    public Deque<Population> getGenerations(){
+    public ArrayList<Population> getGenerations(){
         return generations;
     }
 
-    public Deque<Individual> getBestIndividalsInEachGeneration(){
+    public ArrayList<Individual> getBestIndividalsInEachGeneration(){
         return bestIndividuals;
     }
 
