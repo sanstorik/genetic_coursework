@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         int breedingCount = Integer.valueOf(breeding.getText().toString());
 
         if(dataIsCorrect(mutabilityChance, breedingCount)) {
-            GeneticResponse response = GeneticAlgorithm.newInstance(breedingCount, mutabilityChance, interruptionSource).solve();
-            fetchDataToListActivity(response);
+            GeneticAlgorithm.newInstance(breedingCount, mutabilityChance, interruptionSource).solve();
+            startListActivity();
         }
         else
             Toast.makeText(this, "Wrong input", Toast.LENGTH_SHORT).show();
@@ -68,10 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 && (breeding > 0 && breeding < 1000);
     }
 
-    private void fetchDataToListActivity(GeneticResponse response){
+    private void startListActivity(){
         Intent intent = new Intent(this, ListGeneticActivity.class);
-        intent.putParcelableArrayListExtra("bestInd", response.getBestIndividalsInEachGeneration());
-        intent.putParcelableArrayListExtra("generations", response.getGenerations());
 
         startActivity(intent);
     }
@@ -106,20 +104,15 @@ public class MainActivity extends AppCompatActivity {
                     currentSpinnerPos = previousPos;
                 }).show();
 
-        String[] textViews = new String[]{"Count of iterations to stop", "Max function value to stop",
-        "Min function value to stop"};
         String[] hints = new String[]{"Iterations", "Function value", "Function value"};
 
-        TextView textView = (TextView)alertDialog.findViewById(R.id.sourceInput);
         EditText editValue = (EditText)alertDialog.findViewById(R.id.sourceValue);
         Button input = (Button)alertDialog.findViewById(R.id.source_ok_button);
 
-        if(textView == null || editValue == null || input == null) {
+        if(editValue == null || input == null) {
             alertDialog.dismiss();
             return;
         }
-
-        textView.setText(textViews[sourcePosition]);
 
         if(sourcePosition == 0)
             editValue.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
@@ -129,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
         editValue.setHint(hints[sourcePosition]);
 
         input.setOnClickListener((event) -> {
+            if(editValue.getText().toString().isEmpty()) {
+                alertDialog.cancel();
+                return;
+            }
             inputInterruptionSourceData(sourcePosition, editValue.getText());
             alertDialog.dismiss();
         });

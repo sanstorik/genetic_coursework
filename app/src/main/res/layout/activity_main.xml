@@ -12,18 +12,19 @@
     tools:context="develop.sanstorik.com.genetic_coursework.MainActivity">
 
     <EditText
+        android:id="@+id/mutability_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/mutability_et"
-        android:hint="Mutability"
-        android:fontFamily="monospace"
-        android:textStyle="normal|bold"
-        android:textAlignment="viewStart"
         android:layout_below="@+id/breeding_et"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:fontFamily="monospace"
+        android:hint="Mutability"
+        android:inputType="numberDecimal"
+        android:singleLine="true"
+        android:textSize="23sp"
+        android:textStyle="bold"/>
 
     <Button
         android:text="Find max y(x)"
@@ -38,60 +39,43 @@
         android:layout_alignStart="@+id/mutability_et"
         android:layout_alignRight="@+id/mutability_et"
         android:layout_alignEnd="@+id/mutability_et"
-        android:background="@color/colorButtons"/>
+        android:background="@drawable/text_shape"/>
 
     <EditText
+        android:id="@+id/breeding_et"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/breeding_et"
-        android:hint="Breeding count"
-        android:textAlignment="viewStart"
-        android:fontFamily="monospace"
-        android:textStyle="normal|bold"
+        android:layout_marginTop="112dp"
         android:width="150dp"
-        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:fontFamily="monospace"
+        android:hint="Breeding count"
+        android:inputType="numberSigned"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textSize="23sp"
+        android:textStyle="normal|bold"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/mutability_et"
         android:layout_alignStart="@+id/mutability_et"
-        android:paddingLeft="2dp"
         android:layout_alignRight="@+id/mutability_et"
-        android:layout_alignEnd="@+id/mutability_et"
-        android:paddingRight="2dp"
-        style="@style/Widget.AppCompat.EditText"
-        android:selectAllOnFocus="true"/>
+        android:layout_alignEnd="@+id/mutability_et"/>
 
     <Spinner
         android:id="@+id/intSource_spinner"
         style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/algo_button"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="73dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="15dp"
         android:theme="@style/Animation.AppCompat.DropDownUp"/>
-
-    <TextView
-        android:text="Interruption source"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:id="@+id/textView2"
-        android:fontFamily="monospace"
-        android:textStyle="normal|bold"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:layout_above="@+id/intSource_spinner"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
 
     <TextView
         android:id="@+id/intSource_value"
@@ -99,11 +83,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/text_shape"
         android:fontFamily="monospace"
+        android:padding="5dp"
         android:text="25"
         android:textAllCaps="true"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/mutability_et"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/text_shape"
+        android:fontFamily="monospace"
+        android:text="Interruption source"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="normal|bold"/>
 
 </RelativeLayout>

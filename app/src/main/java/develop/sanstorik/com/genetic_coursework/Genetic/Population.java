@@ -73,6 +73,7 @@ public class Population implements Iterable<Individual>, Parcelable{
     }
 
     @Override public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(individuals.size());
         dest.writeTypedList(individuals);
     }
 
@@ -89,6 +90,7 @@ public class Population implements Iterable<Individual>, Parcelable{
 
 
     private Population(Parcel in){
+        individuals = new ArrayList<>(in.readInt());
         in.readTypedList(individuals, Individual.CREATOR);
     }
 }

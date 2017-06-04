@@ -110,7 +110,7 @@ public class Individual implements Comparable<Individual>, Parcelable{
                 else
                     bits.append("0");
 
-            bits.append(" | y = ");
+            bits.append(" | x = ");
             bits.append(getGenesValue());
 
             return bits.toString();
@@ -183,12 +183,12 @@ public class Individual implements Comparable<Individual>, Parcelable{
     }
 
     @Override public int compareTo(Individual second) {
-        return Double.valueOf(second.getFunctionValue())
-                .compareTo(getFunctionValue());
+        return Double.valueOf(getFunctionValue())
+                .compareTo(second.getFunctionValue());
     }
 
     @Override public String toString() {
-        return " ind with genes = " + chromosome.toString();
+        return " ind with genes = " + chromosome.toString() + " y = " + getFunctionValue();
     }
 
 
