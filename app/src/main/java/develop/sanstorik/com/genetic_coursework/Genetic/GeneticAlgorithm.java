@@ -43,11 +43,6 @@ public class GeneticAlgorithm {
             mutationProcess(currentPopulation);
             currentPopulation = reproductionProcess(currentPopulation);
 
-            for(Individual ind : currentPopulation){
-                Log.i("tag", ind.getFunctionValue() + " " + ind.getGenesValue());
-            }
-
-            Log.i("tag", "size = " + generations.peekLast().size());
             generations.offerLast(new Population(currentPopulation));
             bestIndividuals.offerLast(Collections.max(currentPopulation.getIndividuals()));
         }
@@ -115,7 +110,7 @@ public class GeneticAlgorithm {
         return clusters;
     }
 
-    public static Individual spawnRandomIndividual(){
+    private Individual spawnRandomIndividual(){
         boolean[] genes = new boolean[Individual.GENES_SIZE];
 
         for(int i=0; i < genes.length; i++)

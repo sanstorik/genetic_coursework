@@ -8,7 +8,7 @@ import java.util.Random;
 public class Individual implements Comparable<Individual>, Parcelable{
     private static final float MIN_X = 0;
     private static final float MAX_X = 4;
-    static final int GENES_SIZE = 16;
+    static final int GENES_SIZE = 24;
 
     static private class Chromosome implements Parcelable{
         private static final double STEP;
