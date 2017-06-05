@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 
@@ -60,6 +61,9 @@ public class GraphView extends View {
     private Point endX;
     private Point endY_positive;
     private Point endY_negative;
+
+    private double minValY_pos;
+    private double maxValY_pos;
 
     private final static int POINT_RADIUS = 10;
     Canvas canvas;
@@ -131,6 +135,25 @@ public class GraphView extends View {
             drawText("List is null or empty", nilPoint, nilPoint.lengthX(endX) / 2, -nilPoint.lengthY(endY_positive) / 2);
             return;
         }
+
+        //we need this to get graphic [min;max] instead of
+        minValY_pos = Collections.min(individuals).getFunctionValue();
+        maxValY_pos = Collections.max(individuals).getFunctionValue();
+
+
+        drawText(String.valueOf(minValY_pos), nilPoint, 0, 55);
+        drawText(String.valueOf(maxValY_pos),
+                new Point(nilPoint.getX(), virtualPointY(maxValY_pos - (minValY_pos))), 0, 0);
+
+        double scale = 1 - (minValY_pos/maxValY_pos);
+
+
+        int index = 1;
+        for(Individual ind: individuals){
+            Log.i("tag", ind.getFunctionValue()+"");
+            Point point = new Point(virtualPointX(index++), virtualPointY(ind.getFunctionValue() - minValY_pos));
+            drawPoint(point);
+        }
     }
 
     /*
@@ -138,19 +161,23 @@ public class GraphView extends View {
     @returns this point, recalculated to scale
      */
     private int virtualPointX(double count){
-        return (int)(nilPoint.getX() + (nilPoint.lengthX(endX) / 20) * count);
+        return (int)(nilPoint.getX() + (nilPoint.lengthX(endX) / (individuals.size() + 2)) * count);
     }
 
     private int virtualPointY(double count){
         if(count < 0)
-            return (int)(nilPoint.getY() - (nilPoint.lengthY(endY_negative) / 20) * count);
+            return (int)(nilPoint.getY() - (nilPoint.lengthY(endY_negative) / 35) * count);
         else
-            return (int)(nilPoint.getY() - (nilPoint.lengthY(endY_positive) / 20) * count);
+            return (int)(nilPoint.getY() - (nilPoint.lengthY(endY_positive) / (maxValY_pos - (minValY_pos * 0.8))) * count);
     }
 
     private void drawPoint(Point point){
         canvas.drawCircle(point.getX(), point.getY(), POINT_RADIUS * 0.9f, innerPointPaint);
         canvas.drawCircle(point.getX(), point.getY(), POINT_RADIUS, pointPaint);
+    }
+
+    private void drawLine(Point start, Point end){
+        canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), textPaint);
     }
 
     private void drawText(String text, Point point, int offsetX, int offsetY){
@@ -169,8 +196,6 @@ public class GraphView extends View {
         drawAxis(nilPoint, endX);
         drawAxis(nilPoint, endY_negative);
         drawAxis(nilPoint, endY_positive);
-
-        drawText("0", nilPoint, -50, 25);
         drawPoint(nilPoint);
 
         drawArrowX(endX);
@@ -184,11 +209,15 @@ public class GraphView extends View {
     private void drawArrowX(Point point){
         Drawable arrowRight = getResources().getDrawable(R.drawable.arrow_axis_x);
         drawArrow(arrowRight, point, 70, 70);
+
+        drawText("i", point, 20, 50);
     }
 
     private void drawArrowY(Point point){
         Drawable arrow = getResources().getDrawable(R.drawable.arrow_axis_y);
         drawArrow(arrow, point, 50, 50);
+
+        drawText("Y", point, -60, 20);
     }
 
     private void drawArrow(Drawable arrow, Point point, int xOffset, int yOffset){

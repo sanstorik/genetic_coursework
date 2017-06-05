@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
 import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;
+import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 import develop.sanstorik.com.genetic_coursework.listViewActivity.ListGeneticActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startListActivity(){
         Intent intent = new Intent(this, ListGeneticActivity.class);
-
+       // Intent intent = new Intent(this, GraphActivity.class);
         startActivity(intent);
     }
 

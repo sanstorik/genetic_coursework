@@ -13,6 +13,7 @@ import develop.sanstorik.com.genetic_coursework.Genetic.GeneticResponse;
 import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
 import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
+import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 
 
 public class ListGeneticActivity extends AppCompatActivity {
@@ -92,10 +93,14 @@ public class ListGeneticActivity extends AppCompatActivity {
     }
 
     private void startPopulationActivity(Population population, int index){
-        Intent intent = new Intent(this, PopulationListActivity.class);
+        /*Intent intent = new Intent(this, PopulationListActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable("population", population);
-        bundle.putInt("index", index + 1);
+        bundle.putInt("index", index + 1);*/
+
+        Intent intent = new Intent(this, GraphActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("population", population);
 
         intent.putExtras(bundle);
         startActivity(intent);
