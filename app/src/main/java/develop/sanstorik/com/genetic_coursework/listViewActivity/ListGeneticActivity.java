@@ -2,7 +2,11 @@ package develop.sanstorik.com.genetic_coursework.listViewActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -42,6 +46,29 @@ public class ListGeneticActivity extends AppCompatActivity {
         fillListWithData();
         setRadioClickListeners();
         registerListViewPopulationSelected();
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = new MenuInflater(this);
+        menuInflater.inflate(R.menu.toolbar_menu, menu);
+
+        ActionBar bar = getSupportActionBar();
+        if(bar != null)
+            bar.setTitle("");
+
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.graphItem:
+                startGraphActivity();
+                break;
+            case R.id.backItem:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void fillListWithData(){
@@ -93,14 +120,19 @@ public class ListGeneticActivity extends AppCompatActivity {
     }
 
     private void startPopulationActivity(Population population, int index){
-        /*Intent intent = new Intent(this, PopulationListActivity.class);
+        Intent intent = new Intent(this, PopulationListActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable("population", population);
-        bundle.putInt("index", index + 1);*/
+        bundle.putInt("index", index + 1);
 
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    private void startGraphActivity(){
         Intent intent = new Intent(this, GraphActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable("population", population);
+        bundle.putParcelableArrayList("individuals", bestIndividualsInGen);
 
         intent.putExtras(bundle);
         startActivity(intent);

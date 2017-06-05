@@ -16,9 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".listViewActivity.ListGeneticActivity">
+        <activity android:name=".listViewActivity.ListGeneticActivity"
+            android:configChanges="orientation|screenSize">;
         </activity>
-        <activity android:name=".listViewActivity.PopulationListActivity">
+        <activity android:name=".listViewActivity.PopulationListActivity"
+            android:configChanges="orientation|screenSize">
         </activity>
         <activity android:name=".graph_lib.GraphActivity"
             android:screenOrientation="landscape"/>

@@ -60,7 +60,6 @@ public class GraphView extends View {
     private Point nilPoint;
     private Point endX;
     private Point endY_positive;
-    private Point endY_negative;
 
     private double minValY_pos;
     private double maxValY_pos;
@@ -143,14 +142,10 @@ public class GraphView extends View {
 
         drawText(String.valueOf(minValY_pos), nilPoint, 0, 55);
         drawText(String.valueOf(maxValY_pos),
-                new Point(nilPoint.getX(), virtualPointY(maxValY_pos - (minValY_pos))), 0, 0);
-
-        double scale = 1 - (minValY_pos/maxValY_pos);
-
+                new Point(nilPoint.getX(), virtualPointY(maxValY_pos - minValY_pos)), 0, 0);
 
         int index = 1;
         for(Individual ind: individuals){
-            Log.i("tag", ind.getFunctionValue()+"");
             Point point = new Point(virtualPointX(index++), virtualPointY(ind.getFunctionValue() - minValY_pos));
             drawPoint(point);
         }
@@ -164,11 +159,9 @@ public class GraphView extends View {
         return (int)(nilPoint.getX() + (nilPoint.lengthX(endX) / (individuals.size() + 2)) * count);
     }
 
-    private int virtualPointY(double count){
-        if(count < 0)
-            return (int)(nilPoint.getY() - (nilPoint.lengthY(endY_negative) / 35) * count);
-        else
-            return (int)(nilPoint.getY() - (nilPoint.lengthY(endY_positive) / (maxValY_pos - (minValY_pos * 0.8))) * count);
+    private int virtualPointY(double count) {
+        double minVal = Double.compare(minValY_pos, maxValY_pos) == 0 ? minValY_pos * 0.8 : minValY_pos;
+        return (int) (nilPoint.getY() - (nilPoint.lengthY(endY_positive) / (maxValY_pos - minVal)) * count);
     }
 
     private void drawPoint(Point point){
@@ -187,16 +180,13 @@ public class GraphView extends View {
     private void drawAxises(){
         if(nilPoint == null) {
             //to avoid allocation every time view is drawn
-            nilPoint = new Point(Corners.BOTTOM_LEFT.point().getX() + 75, (int) (Corners.BOTTOM_RIGHT.point().getY() / 1.3));
+            nilPoint = new Point(Corners.BOTTOM_LEFT.point().getX() + 75, Corners.BOTTOM_RIGHT.point().getY() - 75);
             endX = new Point(Corners.BOTTOM_RIGHT.point().getX() - 50, nilPoint.getY());
             endY_positive = new Point(Corners.TOP_LEFT.point().getX() + 75, Corners.TOP_LEFT.point().getY() + 50);
-            endY_negative = new Point(Corners.BOTTOM_LEFT.point().getX() + 75, Corners.BOTTOM_LEFT.point().getY() - 50);
         }
 
         drawAxis(nilPoint, endX);
-        drawAxis(nilPoint, endY_negative);
         drawAxis(nilPoint, endY_positive);
-        drawPoint(nilPoint);
 
         drawArrowX(endX);
         drawArrowY(endY_positive);
