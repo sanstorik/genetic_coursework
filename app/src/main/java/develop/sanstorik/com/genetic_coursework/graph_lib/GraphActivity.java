@@ -8,27 +8,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
+import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
 import develop.sanstorik.com.genetic_coursework.R;
 
 public class GraphActivity extends AppCompatActivity {
 
+    private GraphView graphView;
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        Bitmap temp = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(temp);
+        graphView = (GraphView)findViewById(R.id.graph);
 
-        Paint paint = new Paint();
-        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        paint.setTextSize(50);
-        canvas.drawText("zalupa mamonta", 200, 200, paint);
+        List<Individual> individualList = new ArrayList<>();
+        individualList.add(GeneticAlgorithm.spawnRandomIndividual());
+        individualList.add(GeneticAlgorithm.spawnRandomIndividual());
 
-
-       // MyView myView = (MyView)findViewById(R.id.myView);
-
-        //findViewById(R.id.button).setOnClickListener((event)-> myView.invalidate());
+        graphView.setIndividuals(individualList);
     }
-
-
 }

@@ -108,7 +108,7 @@ public class GeneticAlgorithm {
         return clusters;
     }
 
-    private Individual spawnRandomIndividual(){
+    public static Individual spawnRandomIndividual(){
         boolean[] genes = new boolean[Individual.GENES_SIZE];
 
         for(int i=0; i < genes.length; i++)

@@ -2,14 +2,12 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity">
+    android:layout_height="match_parent">
 
     <develop.sanstorik.com.genetic_coursework.graph_lib.GraphView
+        android:id="@+id/graph"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/button"/>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

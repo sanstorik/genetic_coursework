@@ -15,26 +15,53 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.util.List;
+import java.util.Timer;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
 import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
 
 public class GraphView extends View {
+
+    private enum Corners{
+        BOTTOM_LEFT {
+            @Override Point point() {
+                return GraphView.corners[0];
+            }
+        },
+        TOP_LEFT {
+            @Override Point point() {
+                return GraphView.corners[1];
+            }
+        },
+        TOP_RIGHT {
+            @Override Point point() {
+                return GraphView.corners[2];
+            }
+        },
+        BOTTOM_RIGHT {
+            @Override Point point() {
+                return GraphView.corners[3];
+            }
+        };
+
+        abstract Point point();
+    }
+
     private List<Individual> individuals;
-    private Point[] corners;
+    private static Point[] corners;
 
     private Paint pointPaint;
+    private Paint innerPointPaint;
     private Paint axisPaint;
     private Paint textPaint;
 
-    //x=0, y=0
     private Point nilPoint;
     private Point endX;
     private Point endY_positive;
     private Point endY_negative;
 
-    private final int POINT_RADIUS = 10;
+    private final static int POINT_RADIUS = 10;
     Canvas canvas;
 
     public GraphView(Context context){
@@ -72,20 +99,25 @@ public class GraphView extends View {
         corners[1] = new Point(0,0);
         corners[2] = new Point(getWidth(), 0);
         corners[3] = new Point(getWidth(), getHeight());
-
     }
 
     private void init(){
         pointPaint = new Paint();
         pointPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         pointPaint.setColor(Color.RED);
-        pointPaint.setStrokeWidth(20);
+        pointPaint.setStyle(Paint.Style.STROKE);
+        pointPaint.setStrokeWidth(5);
+
+        innerPointPaint = new Paint(pointPaint);
+        innerPointPaint.setStyle(Paint.Style.FILL);
+        innerPointPaint.setColor(Color.LTGRAY);
 
         axisPaint = new Paint(pointPaint);
+        axisPaint.setStyle(Paint.Style.FILL);
         axisPaint.setColor(Color.BLACK);
         axisPaint.setStrokeWidth(10);
 
-        textPaint = new Paint(pointPaint);
+        textPaint = new Paint(axisPaint);
         textPaint.setTextSize(50);
         textPaint.setColor(Color.BLUE);
     }
@@ -93,11 +125,11 @@ public class GraphView extends View {
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
-
         drawAxises();
 
-        for(int i=0; i < 10; i++){
-            drawPoint(new Point(virtualPoints(i), virtualPointY(i)));
+        if (individuals == null || individuals.size() == 0) {
+            drawText("List is null or empty", nilPoint, nilPoint.lengthX(endX) / 2, -nilPoint.lengthY(endY_positive) / 2);
+            return;
         }
     }
 
@@ -105,32 +137,40 @@ public class GraphView extends View {
     @param count get needed point on X axis
     @returns this point, recalculated to scale
      */
-    private int virtualPoints(int count){
-        return nilPoint.getX() + (nilPoint.lengthX(endX) / 20) * count;
+    private int virtualPointX(double count){
+        return (int)(nilPoint.getX() + (nilPoint.lengthX(endX) / 20) * count);
     }
 
-    private int virtualPointY(int count){
+    private int virtualPointY(double count){
         if(count < 0)
-            return nilPoint.getY() - (nilPoint.lengthY(endY_negative) / 20) * count;
+            return (int)(nilPoint.getY() - (nilPoint.lengthY(endY_negative) / 20) * count);
         else
-            return nilPoint.getY() + (nilPoint.lengthY(endY_positive) / 20) * count;
+            return (int)(nilPoint.getY() - (nilPoint.lengthY(endY_positive) / 20) * count);
     }
 
     private void drawPoint(Point point){
+        canvas.drawCircle(point.getX(), point.getY(), POINT_RADIUS * 0.9f, innerPointPaint);
         canvas.drawCircle(point.getX(), point.getY(), POINT_RADIUS, pointPaint);
     }
 
+    private void drawText(String text, Point point, int offsetX, int offsetY){
+        canvas.drawText(text, point.getX() + offsetX, point.getY() + offsetY, textPaint);
+    }
+
     private void drawAxises(){
-        nilPoint = new Point(corners[1].getX() + 75, (int)(corners[3].getY() / 1.3));
-        endX =  new Point(corners[3].getX() - 50, (int)(corners[3].getY() / 1.3));
-        endY_positive = new Point(corners[1].getX() + 75, corners[1].getY() + 50);
-        endY_negative = new Point(corners[0].getX() + 75, corners[0].getY() - 50);
+        if(nilPoint == null) {
+            //to avoid allocation every time view is drawn
+            nilPoint = new Point(Corners.BOTTOM_LEFT.point().getX() + 75, (int) (Corners.BOTTOM_RIGHT.point().getY() / 1.3));
+            endX = new Point(Corners.BOTTOM_RIGHT.point().getX() - 50, nilPoint.getY());
+            endY_positive = new Point(Corners.TOP_LEFT.point().getX() + 75, Corners.TOP_LEFT.point().getY() + 50);
+            endY_negative = new Point(Corners.BOTTOM_LEFT.point().getX() + 75, Corners.BOTTOM_LEFT.point().getY() - 50);
+        }
 
         drawAxis(nilPoint, endX);
         drawAxis(nilPoint, endY_negative);
         drawAxis(nilPoint, endY_positive);
 
-        canvas.drawText("0", nilPoint.getX() - 50, nilPoint.getY() + 25, textPaint);
+        drawText("0", nilPoint, -50, 25);
         drawPoint(nilPoint);
 
         drawArrowX(endX);
@@ -138,7 +178,6 @@ public class GraphView extends View {
     }
 
     private void drawAxis(Point start, Point end){
-        Log.i("tag", start.getX() + " " + start.getY() + "  " + getHeight());
         canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), axisPaint);
     }
 
