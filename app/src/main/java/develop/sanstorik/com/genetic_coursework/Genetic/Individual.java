@@ -6,9 +6,9 @@ import android.os.Parcelable;
 import java.util.Random;
 
 public class Individual implements Comparable<Individual>, Parcelable{
-    private static final float MIN_X = 0;
-    private static final float MAX_X = 4;
-    static final int GENES_SIZE = 24;
+    private static final double MIN_X = 0;
+    private static final double MAX_X = 4;
+    static final int GENES_SIZE = 32;
 
     static private class Chromosome implements Parcelable{
         private static final double STEP;
@@ -86,7 +86,7 @@ public class Individual implements Comparable<Individual>, Parcelable{
                 else
                     bits.append("0");
 
-            float bitsValue = Integer.parseInt(bits.toString(), 2);
+            double bitsValue = Long.parseLong(bits.toString(), 2);
 
             return MIN_X + (bitsValue * STEP);
         }

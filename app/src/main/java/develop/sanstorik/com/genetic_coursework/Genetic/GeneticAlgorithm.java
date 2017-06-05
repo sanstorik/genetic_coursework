@@ -9,14 +9,14 @@ import java.util.Queue;
 
 public class GeneticAlgorithm {
     private final int breedingIndividualCount;
-    private final float mutationPossibility;
+    private final double mutationPossibility;
 
     private Population currentPopulation;
     private Deque<Population> generations;
     private Deque<Individual> bestIndividuals;
     private InterruptionSource.Interruptible interruptionSource;
 
-    private GeneticAlgorithm(int breedingIndividualCount, float mutationPossibility){
+    private GeneticAlgorithm(int breedingIndividualCount, double mutationPossibility){
         currentPopulation = new Population();
         generations = new LinkedList<>();
         bestIndividuals = new LinkedList<>();
@@ -26,7 +26,7 @@ public class GeneticAlgorithm {
         this.interruptionSource = InterruptionSource.createIterationSource(100);
     }
 
-    private GeneticAlgorithm(int breedingIndividualCount, float mutationPossibility,
+    private GeneticAlgorithm(int breedingIndividualCount, double mutationPossibility,
                              InterruptionSource.Interruptible interruptionSource){
         this(breedingIndividualCount, mutationPossibility);
         this.interruptionSource = interruptionSource;
