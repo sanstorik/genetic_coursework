@@ -12,6 +12,7 @@ import develop.sanstorik.com.genetic_coursework.R;
 public class PopulationListActivity extends AppCompatActivity {
     private ListView generations;
     private int populationIndex;
+    private Population population;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class PopulationListActivity extends AppCompatActivity {
     private void getInputGenerationData(){
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
-            Population population = bundle.getParcelable("population");
+            population = bundle.getParcelable("population");
             populationIndex = bundle.getInt("index");
 
             if (population != null)

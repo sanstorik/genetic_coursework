@@ -16,7 +16,6 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        ImageView imageView = (ImageView)findViewById(R.id.imageView3);
         Bitmap temp = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(temp);
 
@@ -25,11 +24,10 @@ public class GraphActivity extends AppCompatActivity {
         paint.setTextSize(50);
         canvas.drawText("zalupa mamonta", 200, 200, paint);
 
-        imageView.setImageBitmap(temp);
 
-        MyView myView = (MyView)findViewById(R.id.myView);
+       // MyView myView = (MyView)findViewById(R.id.myView);
 
-        findViewById(R.id.button).setOnClickListener((event)-> myView.invalidate());
+        //findViewById(R.id.button).setOnClickListener((event)-> myView.invalidate());
     }
 
 

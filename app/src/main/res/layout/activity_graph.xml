@@ -7,28 +7,9 @@
     android:layout_height="match_parent"
     tools:context="develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity">
 
-    <develop.sanstorik.com.genetic_coursework.graph_lib.MyView
-        android:id="@+id/myView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button"/>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"/>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+    <develop.sanstorik.com.genetic_coursework.graph_lib.GraphView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="200dp"
-        android:paddingTop="0dp"
-        />
+        android:layout_below="@+id/button"/>
 
 </RelativeLayout>
