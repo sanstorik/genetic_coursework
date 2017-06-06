@@ -9,4 +9,10 @@ class IndividualReaderContract{
         static final String TABLE_NAME = "individuals";
         static final String COLUMN_NAME_GENES_BITS = "genesBits";
     }
+
+    static abstract class AuthorizeEntry implements BaseColumns{
+        static final String TABLE_NAME = "authorize";
+        static final String COLUMN_NAME_USERNAME = "username";
+        static final String COLUMN_NAME_PASSWORD = "password";
+    }
 }
