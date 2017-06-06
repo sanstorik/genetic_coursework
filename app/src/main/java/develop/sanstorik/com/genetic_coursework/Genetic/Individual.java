@@ -14,6 +14,7 @@ public class Individual implements Comparable<Individual>, Parcelable{
         private static final double STEP;
         private Random random;
         private boolean[] genes;
+        private String genesString;
         private double genesValue;
 
         static{
@@ -78,21 +79,14 @@ public class Individual implements Comparable<Individual>, Parcelable{
         }
 
         private double calculateGenesValue(){
-            StringBuilder bits = new StringBuilder();
-
-            for (boolean gene : genes)
-                if (gene)
-                    bits.append("1");
-                else
-                    bits.append("0");
-
-            double bitsValue = Long.parseLong(bits.toString(), 2);
-
+            double bitsValue = Long.parseLong(genesString, 2);
             return MIN_X + (bitsValue * STEP);
         }
 
         private void init(){
             random = new Random(47);
+
+            genesString = genesToString();
             genesValue = calculateGenesValue();
         }
 
@@ -101,23 +95,19 @@ public class Individual implements Comparable<Individual>, Parcelable{
         }
 
 
-        @Override public String toString() {
+        private String genesToString(){
             StringBuilder bits = new StringBuilder();
-
-            int index = 0;
-            for (boolean gene : genes) {
-                index++;
-
+            for (boolean gene : genes)
                 if (gene)
                     bits.append("1");
                 else
                     bits.append("0");
 
-                if(index % 4 == 0 && index != 0)
-                    bits.append(" ");
-            }
-
             return bits.toString();
+        }
+
+        @Override public String toString() {
+            return genesToString();
         }
 
 

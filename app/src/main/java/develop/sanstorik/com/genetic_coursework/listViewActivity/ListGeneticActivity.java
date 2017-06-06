@@ -4,19 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticResponse;
 import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
 import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
+import develop.sanstorik.com.genetic_coursework.database.IndividualDatabase;
 import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 
 
@@ -46,6 +50,29 @@ public class ListGeneticActivity extends AppCompatActivity {
         fillListWithData();
         setRadioClickListeners();
         registerListViewPopulationSelected();
+
+        registerForContextMenu(listView);
+
+        IndividualDatabase.connection(this, IndividualDatabase.SQLmode.WRITE).insertIndividual(bestIndividualsInGen.get(0));
+        IndividualDatabase.connection(this, IndividualDatabase.SQLmode.READ).readIndividuals();
+    }
+
+    @Override public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+        Individual ind;
+
+        if(listView.getItemAtPosition(info.position) instanceof Individual) {
+            ind = (Individual) listView.getItemAtPosition(info.position);
+            menu.add(1,1,1, String.format(Locale.getDefault(), "y = %.10f", ind.getFunctionValue()));
+        }
+
+        menu.add(1, 1, 1, "send");
+    }
+
+    @Override public boolean onContextItemSelected(MenuItem item) {
+        return super.onContextItemSelected(item);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {

@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
+import develop.sanstorik.com.genetic_coursework.database.IndividualDatabase;
 import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 
 public class PopulationListActivity extends AppCompatActivity {

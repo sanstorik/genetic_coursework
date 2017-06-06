@@ -6,6 +6,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +24,6 @@ import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;
 import develop.sanstorik.com.genetic_coursework.listViewActivity.ListGeneticActivity;
 
 public class MainActivity extends AppCompatActivity {
-
     private InterruptionSource.Interruptible interruptionSource;
     private Spinner interruptSpinner;
     private TextView interruptValue;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.algo_button).setOnClickListener((event) -> startAlgorithm());
         interruptionSource = InterruptionSource.createIterationSource(
                 Integer.valueOf(interruptValue.getText().toString()));
+
+        registerForContextMenu(interruptValue);
     }
 
     private void startAlgorithm(){
@@ -45,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (mutability.getText().toString().isEmpty()
                 || breeding.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(this)
+                    .setTitle("Wrong input")
+                    .setIcon(R.drawable.arrow_axis_x)
+                    .setMessage("Mutability should be in range (0;1)" +
+                            "\nbreeding should be in range (0;1000)")
+                    .setNegativeButton("OK", (dialog, id)-> dialog.cancel())
+                    .show();
             return;
         }
 
@@ -67,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void startListActivity(){
         Intent intent = new Intent(this, ListGeneticActivity.class);
-       // Intent intent = new Intent(this, GraphActivity.class);
         startActivity(intent);
     }
 
