@@ -2,12 +2,10 @@ package develop.sanstorik.com.genetic_coursework;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,8 +18,6 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
 import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;

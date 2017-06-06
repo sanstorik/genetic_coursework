@@ -2,7 +2,6 @@ package develop.sanstorik.com.genetic_coursework.listViewActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -36,8 +33,6 @@ import develop.sanstorik.com.genetic_coursework.Genetic.GeneticResponse;
 import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
 import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
-import develop.sanstorik.com.genetic_coursework.database.AuthorizeUserDatabase;
-import develop.sanstorik.com.genetic_coursework.database.IndividualDatabase;
 import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 
 

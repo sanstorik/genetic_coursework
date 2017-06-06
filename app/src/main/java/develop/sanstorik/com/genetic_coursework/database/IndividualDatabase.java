@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
-import static   develop.sanstorik.com.genetic_coursework.database.IndividualReaderContract.IndividualEntry;
+
+import static develop.sanstorik.com.genetic_coursework.database.IndividualReaderContract.IndividualEntry;
 
 public class IndividualDatabase {
     public enum SQLmode{

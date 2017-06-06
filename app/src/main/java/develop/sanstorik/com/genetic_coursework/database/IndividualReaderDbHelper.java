@@ -4,9 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 class IndividualReaderDbHelper extends SQLiteOpenHelper {
     private final static String DROP_TABLE = "DROP TABLE IF EXISTS " + IndividualReaderContract.IndividualEntry.TABLE_NAME;
     private final static String CREATE_TABLE =
