@@ -4,22 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Picture;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RotateDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Timer;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
-import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
 
 public class GraphView extends View {

@@ -1,7 +1,5 @@
 package develop.sanstorik.com.genetic_coursework.Genetic;
 
-import android.util.Log;
-
 import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;

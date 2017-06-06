@@ -6,8 +6,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
 import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;
-import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 import develop.sanstorik.com.genetic_coursework.listViewActivity.ListGeneticActivity;
 
 public class MainActivity extends AppCompatActivity {
