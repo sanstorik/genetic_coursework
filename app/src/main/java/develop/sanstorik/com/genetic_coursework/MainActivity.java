@@ -6,7 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
-import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
 import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;
+import develop.sanstorik.com.genetic_coursework.database.AuthorizeUserDatabase;
+import develop.sanstorik.com.genetic_coursework.database.IndividualDatabase;
 import develop.sanstorik.com.genetic_coursework.listViewActivity.ListGeneticActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +43,53 @@ public class MainActivity extends AppCompatActivity {
                 Integer.valueOf(interruptValue.getText().toString()));
 
         registerForContextMenu(interruptValue);
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = new MenuInflater(this);
+        menuInflater.inflate(R.menu.toolbar_register, menu);
+
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.loginTlb:
+                showUserDataDialog(false);
+                break;
+            case R.id.registerTlb:
+                showUserDataDialog(false);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    //register = true -- log in = false
+    private void showUserDataDialog(boolean registerUser){
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setView(R.layout.userdata_dialog)
+                .show();
+
+        EditText userName = (EditText)alertDialog.findViewById(R.id.userName_et);
+        EditText password = (EditText)alertDialog.findViewById(R.id.password_et);
+        if(userName == null || password == null)
+            return;
+
+        alertDialog.findViewById(R.id.userData_btn).setOnClickListener(
+                (event)->{
+                    if(registerUser)
+                        AuthorizeUserDatabase.connection(MainActivity.this, IndividualDatabase.SQLmode.WRITE)
+                        .registerUser(userName.getText().toString(), password.getText().toString());
+                    else
+                        Toast.makeText(MainActivity.this,
+                                String.valueOf(AuthorizeUserDatabase.connection(MainActivity.this, IndividualDatabase.SQLmode.READ)
+                                .userIsValid(userName.getText().toString(), password.getText().toString()))
+                                , Toast.LENGTH_SHORT).show();
+
+                    alertDialog.dismiss();
+                }
+        );
     }
 
     private void startAlgorithm(){

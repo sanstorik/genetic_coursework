@@ -3,9 +3,13 @@ package develop.sanstorik.com.genetic_coursework.Genetic;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Random;
 
-public class Individual implements Comparable<Individual>, Parcelable{
+public final class Individual implements Comparable<Individual>, Parcelable, Serializable{
     private static final double MIN_X = 0;
     private static final double MAX_X = 4;
     static final int GENES_SIZE = 32;
@@ -147,7 +151,7 @@ public class Individual implements Comparable<Individual>, Parcelable{
 
 
 
-    private Chromosome chromosome;
+    private transient Chromosome chromosome;
 
     Individual(boolean[] genes){
         this.chromosome = new Chromosome(genes.clone());
@@ -161,10 +165,16 @@ public class Individual implements Comparable<Individual>, Parcelable{
     public double getFunctionValue(){
         double x = chromosome.getGenesValue();
 
-       //return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
-       return Math.pow(x, 2);
+<<<<<<< HEAD
+       return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
+       //return Math.pow(x, 2);
 
        // return x * Math.sin(x+5) * Math.cos(x-6) * Math.sin(x-7) * Math.cos(x-8) * Math.sin((x/3));
+=======
+        return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
+       // return Math.pow(x, 2);
+       // return(x * Math.sin(x+5) * Math.cos(x-6) * Math.sin(x-7) * Math.cos(x-8) * Math.sin((x/3)));
+>>>>>>> 657494594fe1c14b3e7eabc6f8bbcd94dc91af17
     }
 
     public double getGenesValue(){
@@ -223,5 +233,21 @@ public class Individual implements Comparable<Individual>, Parcelable{
 
     private Individual(Parcel in){
         chromosome = in.readParcelable(Chromosome.class.getClassLoader());
+    }
+
+
+
+    /*Serialize*/
+
+    private void writeObject(ObjectOutputStream stream) throws IOException{
+        stream.defaultWriteObject();
+
+        stream.writeObject(chromosome.genes);
+    }
+
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException{
+        stream.defaultReadObject();
+
+        chromosome = new Chromosome((boolean[])stream.readObject());
     }
 }
