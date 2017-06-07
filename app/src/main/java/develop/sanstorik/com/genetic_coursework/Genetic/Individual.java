@@ -165,16 +165,10 @@ public final class Individual implements Comparable<Individual>, Parcelable, Ser
     public double getFunctionValue(){
         double x = chromosome.getGenesValue();
 
-<<<<<<< HEAD
        return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
        //return Math.pow(x, 2);
 
        // return x * Math.sin(x+5) * Math.cos(x-6) * Math.sin(x-7) * Math.cos(x-8) * Math.sin((x/3));
-=======
-        return x * (x - 2) * (x - 2.75f) * Math.exp((x/10)) * Math.cos((x/10)) *(2 - Math.pow(3, x-2));
-       // return Math.pow(x, 2);
-       // return(x * Math.sin(x+5) * Math.cos(x-6) * Math.sin(x-7) * Math.cos(x-8) * Math.sin((x/3)));
->>>>>>> 657494594fe1c14b3e7eabc6f8bbcd94dc91af17
     }
 
     public double getGenesValue(){

@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 showUserDataDialog(false);
                 break;
             case R.id.registerTlb:
-                showUserDataDialog(false);
+                showUserDataDialog(true);
                 break;
         }
 
