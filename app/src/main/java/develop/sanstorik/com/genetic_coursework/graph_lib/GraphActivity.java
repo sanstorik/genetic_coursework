@@ -32,7 +32,6 @@ public class GraphActivity extends Activity {
                 individualList = population.getIndividuals();
             else
                 individualList = bundle.getParcelableArrayList("individuals");
-
         }
     }
 }

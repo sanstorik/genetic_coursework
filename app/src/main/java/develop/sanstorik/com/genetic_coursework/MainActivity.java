@@ -1,5 +1,6 @@
 package develop.sanstorik.com.genetic_coursework;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +10,7 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -49,7 +51,32 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = new MenuInflater(this);
         menuInflater.inflate(R.menu.toolbar_register, menu);
 
+        SubMenu subMenu = menu.addSubMenu(2,2,1,"alert Dialogs");
+        subMenu.add(3,3,3, "list");
+        subMenu.add(4,4,4, "options");
+
         return true;
+    }
+
+    private void showListDialog(){
+        CharSequence[] sequences = new CharSequence[]{"hohol", "normal(ne hohol)"};
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Choose nation")
+                .setItems(sequences,
+                        (dialogInterface, which) -> Toast.makeText(this, sequences[which].toString(), Toast.LENGTH_SHORT).show())
+                .show();
+    }
+
+    private void showOptionsDialog(){
+        CharSequence[] sequences = new CharSequence[]{"hohol", "normal(ne hohol)"};
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Choose nation")
+                .setMultiChoiceItems(sequences, new boolean[]{false, true},
+                        (dialogInterface, which, isChecked) ->
+                                Toast.makeText(this, sequences[which].toString() + " "  + String.valueOf(isChecked), Toast.LENGTH_SHORT).show())
+                .setNegativeButton("OK", (dialogInterface, which) -> dialogInterface.dismiss())
+                .setPositiveButton("Cancel", (dialogInterface, which) -> dialogInterface.dismiss())
+                .show();
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -59,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.registerTlb:
                 showUserDataDialog(true);
+                break;
+            case 3:
+                showListDialog();
+                break;
+            case 4:
+                showOptionsDialog();
                 break;
         }
 
