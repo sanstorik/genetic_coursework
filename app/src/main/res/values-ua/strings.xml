@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Хіхіл</string>
+    <string name="settingsBool">Ти хохіл або нормальная людина?</string>
+
+    <string-array name="listValues">
+        <item>Один</item>
+        <item>Два</item>
+        <item>Хохіл</item>
+    </string-array>
+</resources>

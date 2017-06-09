@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 Integer.valueOf(interruptValue.getText().toString()));
 
         registerForContextMenu(interruptValue);
+
+        Log.i("tag", String.valueOf(getPreferences(MODE_PRIVATE).getString("pref_sync_list", "null")));
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
