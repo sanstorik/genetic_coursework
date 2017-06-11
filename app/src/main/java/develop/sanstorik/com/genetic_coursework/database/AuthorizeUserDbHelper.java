@@ -21,6 +21,7 @@ class AuthorizeUserDbHelper extends SQLiteOpenHelper {
     }
 
     @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL(DROP_TABLE);
+        db.execSQL(CREATE_TABLE);
     }
 }

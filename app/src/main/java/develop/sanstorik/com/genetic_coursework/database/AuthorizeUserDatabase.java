@@ -13,7 +13,7 @@ public class AuthorizeUserDatabase {
     private IndividualDatabase.SQLmode mode;
 
 
-    public AuthorizeUserDatabase(Context context, IndividualDatabase.SQLmode mode){
+    private AuthorizeUserDatabase(Context context, IndividualDatabase.SQLmode mode){
         readerContract = new AuthorizeUserDbHelper(context);
         this.mode = mode;
 
@@ -37,7 +37,7 @@ public class AuthorizeUserDatabase {
 
     public boolean userIsValid(String userName, String password){
         String[] columns = {AuthorizeEntry.COLUMN_NAME_USERNAME, AuthorizeEntry.COLUMN_NAME_PASSWORD};
-        String whereClause = AuthorizeEntry.COLUMN_NAME_USERNAME + "='" +userName + "' AND " +
+        String whereClause = AuthorizeEntry.COLUMN_NAME_USERNAME + "='" + userName + "' AND " +
                 AuthorizeEntry.COLUMN_NAME_PASSWORD + "='" + password + "'";
 
         Cursor cursor = database.query(AuthorizeEntry.TABLE_NAME, columns, whereClause, null, null, null, null);

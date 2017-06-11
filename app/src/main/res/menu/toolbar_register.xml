@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/registerTlb"
         android:title="Register"
@@ -8,4 +9,11 @@
         android:id="@+id/loginTlb"
         android:title="Log in"
         android:visible="true"/>
+    <item
+        android:id="@+id/settingsTlb"
+        android:icon="?attr/actionModeShareDrawable"
+        android:title="Settings"
+        android:visible="true"
+        android:showAsAction="always"/>
+
 </menu>

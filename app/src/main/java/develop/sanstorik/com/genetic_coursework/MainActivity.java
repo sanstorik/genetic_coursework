@@ -1,5 +1,6 @@
 package develop.sanstorik.com.genetic_coursework;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = new MenuInflater(this);
         menuInflater.inflate(R.menu.toolbar_register, menu);
 
+        SubMenu subMenu = menu.addSubMenu("Dialogs");
+        subMenu.add(5,5,5, "dialog");
+        subMenu.add(6,6,6, "dialog2");
+
         return true;
     }
 
@@ -62,6 +68,25 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.registerTlb:
                 showUserDataDialog(true);
+                break;
+            case R.id.settingsTlb:
+                Intent intent = new Intent(this, PreferenceActivity.class);
+                startActivity(intent);
+                break;
+            case 5:
+                CharSequence[] items = {"one", "two", "three"};
+                new AlertDialog.Builder(this)
+                        .setItems(items, (dialog, which) -> dialog.dismiss())
+                        .show();
+                break;
+            case 6:
+                CharSequence[] items1 = {"one", "two", "three"};
+                boolean[] areCheked = {false, false, true};
+                new AlertDialog.Builder(this)
+                        .setMultiChoiceItems(items1, areCheked,
+                                (dialog, which, isChecked) ->
+                        Toast.makeText(MainActivity.this, items1[which].toString() + String.valueOf(isChecked), Toast.LENGTH_SHORT).show())
+                        .show();
                 break;
         }
 
