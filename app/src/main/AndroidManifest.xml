@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".GreetActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -21,7 +21,8 @@
         </activity>
         <activity
             android:name=".listViewActivity.ListGeneticActivity"
-            android:configChanges="orientation|screenSize">;
+            android:configChanges="orientation|screenSize">
+            ;
         </activity>
         <activity
             android:name=".listViewActivity.PopulationListActivity"
@@ -31,6 +32,8 @@
             android:name=".graph_lib.GraphActivity"
             android:screenOrientation="landscape"/>
         <activity android:name=".PreferenceActivity"/>
+        <activity android:name=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

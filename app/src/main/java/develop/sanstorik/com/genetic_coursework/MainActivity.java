@@ -1,5 +1,6 @@
 package develop.sanstorik.com.genetic_coursework;
 
+import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 Integer.valueOf(interruptValue.getText().toString()));
 
         registerForContextMenu(interruptValue);
-
-        Log.i("tag", String.valueOf(getPreferences(MODE_PRIVATE).getString("pref_sync_list", "null")));
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -114,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                                 String.valueOf(AuthorizeUserDatabase.connection(MainActivity.this, IndividualDatabase.SQLmode.READ)
                                 .userIsValid(userName.getText().toString(), password.getText().toString()))
                                 , Toast.LENGTH_SHORT).show();
+
 
                     alertDialog.dismiss();
                 }
