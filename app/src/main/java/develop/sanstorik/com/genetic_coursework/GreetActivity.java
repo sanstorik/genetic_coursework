@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,15 @@ public class GreetActivity extends AppCompatActivity {
 
         valakasImage = (ImageView)findViewById(R.id.vlksIV);
         valakasAnimation();
+
+        introImage.setBackgroundResource(R.drawable.cat_animation);
+    }
+
+    @Override public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        AnimationDrawable animationDrawable = (AnimationDrawable)introImage.getBackground();
+        animationDrawable.start();
     }
 
     private void valakasAnimation(){

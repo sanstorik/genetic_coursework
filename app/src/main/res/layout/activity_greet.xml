@@ -7,30 +7,10 @@
     android:layout_height="match_parent"
     tools:context="develop.sanstorik.com.genetic_coursework.GreetActivity">
 
-    <ImageView
-        android:id="@+id/vlksIV"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="1dp"
-        app:layout_constraintDimensionRatio="h,1:1"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"/>
-
-    <ImageView
-        android:id="@+id/introIV"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introTV"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_menu_compass"
-        tools:layout_editor_absoluteX="8dp"/>
-
     <TextView
         android:id="@+id/introTV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:lineSpacingExtra="5sp"
         android:text="This is application or not or yes onrrwqrwqrwq"
@@ -39,5 +19,31 @@
         android:textStyle="bold"
         tools:layout_editor_absoluteX="-7dp"
         tools:layout_editor_absoluteY="16dp"/>
+
+    <ImageView
+        android:id="@+id/introIV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/introTV"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_below="@+id/introTV"
+        android:layout_toRightOf="@+id/vlksIV"
+        android:layout_toEndOf="@+id/vlksIV"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageView
+        android:id="@+id/vlksIV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        android:layout_below="@+id/introTV"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
