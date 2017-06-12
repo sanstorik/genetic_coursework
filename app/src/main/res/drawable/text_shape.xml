@@ -2,10 +2,12 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle" >
 
-    <!-- View background color -->
-    <solid
-        android:color="@color/colorButtons" >
-    </solid>
+    <gradient
+        android:type="radial"
+        android:gradientRadius="400"
+        android:startColor="@color/colorButtons"
+        android:endColor="@color/colorAccent"
+        />
 
     <!-- View border color and width -->
     <stroke

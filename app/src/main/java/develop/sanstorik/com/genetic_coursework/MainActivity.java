@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
         subMenu.add(5,5,5, "dialog");
         subMenu.add(6,6,6, "dialog2");
 
+        MusicService
         return true;
     }
-
 
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
