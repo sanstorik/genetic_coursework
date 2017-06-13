@@ -2,12 +2,15 @@ package develop.sanstorik.com.genetic_coursework;
 
 import android.content.Intent;
 import android.drm.DrmStore;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
     private Spinner interruptSpinner;
     private TextView interruptValue;
     private int currentSpinnerPos;
+    private SoundPool soundPool;
+
+    private static int chiki_briki_ID;
+    private static int burn_ID;
+    private static int fire_ID;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 Integer.valueOf(interruptValue.getText().toString()));
 
         registerForContextMenu(interruptValue);
+        initialiseSoundPool();
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,13 +76,16 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.loginTlb:
                 showUserDataDialog(false);
+                soundPool.play(chiki_briki_ID, 1, 1, 0, 0 ,1);
                 break;
             case R.id.registerTlb:
                 showUserDataDialog(true);
+                soundPool.play(burn_ID, 1, 1, 0, 0 ,1);
                 break;
             case R.id.settingsTlb:
                 Intent intent = new Intent(this, PreferenceActivity.class);
                 startActivity(intent);
+                soundPool.play(fire_ID, 1, 1, 0, 0 ,1);
                 break;
             case 16:
                 Intent musicService = new Intent(this, MusicPlayerService.class);
@@ -104,6 +116,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initialiseSoundPool(){
+        soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+
+        chiki_briki_ID = soundPool.load(this, R.raw.chiki_briki_sound, 1);
+        burn_ID = soundPool.load(this, R.raw.burn_sound, 2);
+        fire_ID = soundPool.load(this, R.raw.fire_sound, 1);
+
     }
 
     //register = true -- log in = false
