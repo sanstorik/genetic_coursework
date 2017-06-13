@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.toolbar_register, menu);
 
         menu.add(2, 16, 2, "MusicPlayer");
+        menu.add(2, 17, 2, "Notification");
         SubMenu subMenu = menu.addSubMenu("Dialogs");
         subMenu.add(5,5,5, "dialog");
         subMenu.add(6,6,6, "dialog2");
@@ -66,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.loginTlb:
                 showUserDataDialog(false);
-
-                Intent service = new Intent(this, NotificationService.class);
-                startService(service);
                 break;
             case R.id.registerTlb:
                 showUserDataDialog(true);
@@ -83,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 musicService.setAction(MusicPlayerService.ACTION_PLAY);
 
                 startService(musicService);
+                break;
+            case 17:
+                Intent service = new Intent(this, NotificationService.class);
+                startService(service);
                 break;
             case 5:
                 CharSequence[] items = {"one", "two", "three"};

@@ -31,14 +31,13 @@ public class MusicPlayerService extends Service{
             mediaPlayer.setOnPreparedListener(MediaPlayer::start);
             mediaPlayer.prepareAsync();
 
-            new Notifications(this).createNotification("Music", "Guitar song is playing");
+            new Notifications(this, this).createMusicNotification("Music", "Guitar song is playing", mediaPlayer);
         }
 
         return START_NOT_STICKY;
     }
 
     @Nullable @Override public IBinder onBind(Intent intent) {
-
         return null;
     }
 
