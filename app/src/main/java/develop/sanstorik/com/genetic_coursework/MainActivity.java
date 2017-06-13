@@ -3,6 +3,8 @@ package develop.sanstorik.com.genetic_coursework;
 import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         subMenu.add(5,5,5, "dialog");
         subMenu.add(6,6,6, "dialog2");
 
-        MusicService
         return true;
     }
 
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.loginTlb:
                 showUserDataDialog(false);
+
+                Intent service = new Intent(this, NotificationService.class);
+                startService(service);
                 break;
             case R.id.registerTlb:
                 showUserDataDialog(true);
