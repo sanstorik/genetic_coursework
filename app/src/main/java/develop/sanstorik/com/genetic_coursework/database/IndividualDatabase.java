@@ -6,10 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
+import develop.sanstorik.com.genetic_coursework.genetic.Individual;
 
 import static develop.sanstorik.com.genetic_coursework.database.IndividualReaderContract.IndividualEntry;
 
@@ -51,8 +48,6 @@ public class IndividualDatabase {
                 IndividualEntry._ID,
                 IndividualEntry.COLUMN_NAME_GENES_BITS
         };
-
-        List<Individual> individuals = new ArrayList<>();
 
         Cursor cursor = database.query(IndividualEntry.TABLE_NAME, columns, null, null, null, null, null);
         cursor.moveToFirst();

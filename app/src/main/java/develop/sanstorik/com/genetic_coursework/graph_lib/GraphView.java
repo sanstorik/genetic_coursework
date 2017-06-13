@@ -11,8 +11,8 @@ import android.view.View;
 import java.util.Collections;
 import java.util.List;
 
-import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
 import develop.sanstorik.com.genetic_coursework.R;
+import develop.sanstorik.com.genetic_coursework.genetic.Individual;
 
 public class GraphView extends View {
 
@@ -57,7 +57,7 @@ public class GraphView extends View {
     private double maxValY_pos;
 
     private final static int POINT_RADIUS = 10;
-    Canvas canvas;
+    private Canvas canvas;
 
     public GraphView(Context context){
         super(context);

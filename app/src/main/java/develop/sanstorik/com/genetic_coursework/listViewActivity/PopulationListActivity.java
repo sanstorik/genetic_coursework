@@ -9,8 +9,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
+import develop.sanstorik.com.genetic_coursework.genetic.Population;
 import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 
 public class PopulationListActivity extends AppCompatActivity {

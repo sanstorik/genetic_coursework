@@ -3,6 +3,7 @@
           package="develop.sanstorik.com.genetic_coursework">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -36,6 +37,8 @@
         </activity>
 
         <service android:name=".NotificationService"/>
+
+        <service android:name=".music_player.MusicPlayerService"/>
     </application>
 
 </manifest>

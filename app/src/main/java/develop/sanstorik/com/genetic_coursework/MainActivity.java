@@ -1,16 +1,13 @@
 package develop.sanstorik.com.genetic_coursework;
 
-import android.animation.ValueAnimator;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.AudioManager;
+import android.drm.DrmStore;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,11 +22,12 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import develop.sanstorik.com.genetic_coursework.Genetic.GeneticAlgorithm;
-import develop.sanstorik.com.genetic_coursework.Genetic.InterruptionSource;
 import develop.sanstorik.com.genetic_coursework.database.AuthorizeUserDatabase;
 import develop.sanstorik.com.genetic_coursework.database.IndividualDatabase;
+import develop.sanstorik.com.genetic_coursework.genetic.GeneticAlgorithm;
+import develop.sanstorik.com.genetic_coursework.genetic.InterruptionSource;
 import develop.sanstorik.com.genetic_coursework.listViewActivity.ListGeneticActivity;
+import develop.sanstorik.com.genetic_coursework.music_player.MusicPlayerService;
 
 public class MainActivity extends AppCompatActivity {
     private InterruptionSource.Interruptible interruptionSource;
@@ -55,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = new MenuInflater(this);
         menuInflater.inflate(R.menu.toolbar_register, menu);
 
+        menu.add(2, 16, 2, "MusicPlayer");
         SubMenu subMenu = menu.addSubMenu("Dialogs");
         subMenu.add(5,5,5, "dialog");
         subMenu.add(6,6,6, "dialog2");
@@ -77,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settingsTlb:
                 Intent intent = new Intent(this, PreferenceActivity.class);
                 startActivity(intent);
+                break;
+            case 16:
+                Intent musicService = new Intent(this, MusicPlayerService.class);
+                musicService.setPackage("develop.sanstorik.com.genetic_coursework/.music_player.MusicPlayerService");
+                musicService.setAction(MusicPlayerService.ACTION_PLAY);
+
+                startService(musicService);
                 break;
             case 5:
                 CharSequence[] items = {"one", "two", "three"};

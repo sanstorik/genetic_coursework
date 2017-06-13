@@ -12,7 +12,7 @@ public class NotificationService extends IntentService {
 
     @Override protected void onHandleIntent(Intent intent) {
         while(true){
-            new Notifications(this).createNotification();
+            new Notifications(this).createNotification("cat", "cat is running");
 
             try{
                 Thread.sleep(1000);

@@ -1,4 +1,4 @@
-package develop.sanstorik.com.genetic_coursework.Genetic;
+package develop.sanstorik.com.genetic_coursework.genetic;
 
 import java.util.Collections;
 import java.util.Deque;

@@ -5,9 +5,9 @@ import android.os.Bundle;
 
 import java.util.List;
 
-import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
-import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
+import develop.sanstorik.com.genetic_coursework.genetic.Individual;
+import develop.sanstorik.com.genetic_coursework.genetic.Population;
 
 public class GraphActivity extends Activity {
 

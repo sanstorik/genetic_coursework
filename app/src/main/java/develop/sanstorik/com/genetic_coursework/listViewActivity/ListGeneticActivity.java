@@ -29,10 +29,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import develop.sanstorik.com.genetic_coursework.Genetic.GeneticResponse;
-import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
-import develop.sanstorik.com.genetic_coursework.Genetic.Population;
 import develop.sanstorik.com.genetic_coursework.R;
+import develop.sanstorik.com.genetic_coursework.genetic.GeneticResponse;
+import develop.sanstorik.com.genetic_coursework.genetic.Individual;
+import develop.sanstorik.com.genetic_coursework.genetic.Population;
 import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 
 

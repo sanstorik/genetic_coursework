@@ -12,8 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Locale;
 
-import develop.sanstorik.com.genetic_coursework.Genetic.Individual;
 import develop.sanstorik.com.genetic_coursework.R;
+import develop.sanstorik.com.genetic_coursework.genetic.Individual;
 
 class IndividualAdapter extends ArrayAdapter<Individual> {
 

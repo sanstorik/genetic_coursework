@@ -1,4 +1,4 @@
-package develop.sanstorik.com.genetic_coursework.Genetic;
+package develop.sanstorik.com.genetic_coursework.genetic;
 
 public class InterruptionSource {
     private static final double ACCURACY = 6.1e-5;

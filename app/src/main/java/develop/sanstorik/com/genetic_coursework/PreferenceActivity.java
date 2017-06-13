@@ -1,19 +1,9 @@
 package develop.sanstorik.com.genetic_coursework;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.os.Build;
-import android.preference.ListPreference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
-
-import java.util.Locale;
 
 public class PreferenceActivity extends Activity {
 

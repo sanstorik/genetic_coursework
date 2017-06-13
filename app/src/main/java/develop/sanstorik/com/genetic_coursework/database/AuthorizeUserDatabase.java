@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import static develop.sanstorik.com.genetic_coursework.database.IndividualReaderContract.AuthorizeEntry;
 
 public class AuthorizeUserDatabase {
-    private AuthorizeUserDbHelper readerContract;
-    private SQLiteDatabase database;
-    private IndividualDatabase.SQLmode mode;
+    private final AuthorizeUserDbHelper readerContract;
+    private final SQLiteDatabase database;
+    private final IndividualDatabase.SQLmode mode;
 
 
     private AuthorizeUserDatabase(Context context, IndividualDatabase.SQLmode mode){
