@@ -16,4 +16,11 @@
         android:visible="true"
         android:showAsAction="always"/>
 
+    <item
+        android:id="@+id/photoTlb"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="Settings"
+        android:visible="true"
+        android:showAsAction="always"/>
+
 </menu>

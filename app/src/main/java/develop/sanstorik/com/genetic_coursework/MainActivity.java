@@ -2,10 +2,12 @@ package develop.sanstorik.com.genetic_coursework;
 
 import android.content.Intent;
 import android.drm.DrmStore;
+import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -20,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -38,10 +41,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView interruptValue;
     private int currentSpinnerPos;
     private SoundPool soundPool;
+    private ImageView frontImage;
 
     private static int chiki_briki_ID;
     private static int burn_ID;
     private static int fire_ID;
+
+    private static final int PHOTO_ID = 0x23;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         interruptValue = (TextView)findViewById(R.id.intSource_value);
         createInterruptionSourceSpinner();
 
+        frontImage = (ImageView)findViewById(R.id.frontImage);
         findViewById(R.id.algo_button).setOnClickListener((event) -> startAlgorithm());
         interruptionSource = InterruptionSource.createIterationSource(
                 Integer.valueOf(interruptValue.getText().toString()));
@@ -87,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 soundPool.play(fire_ID, 1, 1, 0, 0 ,1);
                 break;
+            case R.id.photoTlb:
+                Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if(photoIntent.resolveActivity(getPackageManager()) != null)
+                    startActivityForResult(photoIntent, PHOTO_ID);
+                break;
             case 16:
                 Intent musicService = new Intent(this, MusicPlayerService.class);
                 musicService.setPackage("develop.sanstorik.com.genetic_coursework/.music_player.MusicPlayerService");
@@ -116,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == PHOTO_ID && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            Bitmap image =  (Bitmap)bundle.get("data");
+
+            frontImage.setImageBitmap(image);
+        }
     }
 
     private void initialiseSoundPool(){
