@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">genetic_coursework</string>
+    <string name="app_name">Glad Valakas</string>
+    <string name="settingsBool">Are you hohol or normal person?</string>
+
+    <string-array name="listValues">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+    </string-array>
 </resources>

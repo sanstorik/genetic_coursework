@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+    <CheckBoxPreference
+        android:key="pref_sync"
+        android:title="@string/settingsBool"
+        android:summary="путин лучший четыре пять"
+        android:defaultValue="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ListPreference
+        android:key = "pref_sync_list"
+        android:icon="@drawable/text_circle_shape"
+        android:entries="@array/listValues"
+        android:entryValues="@array/listValues"
+        android:title="Choose your destiny"
+        android:summary="Hello"/>
+</PreferenceScreen>

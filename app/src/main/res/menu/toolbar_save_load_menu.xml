@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/backItem"
+        android:icon="?attr/actionModeCloseDrawable"
+        android:showAsAction="always"
+        android:title="Item"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/graphItem"
+        android:icon="@mipmap/list_icon"
+        android:showAsAction="always"
+        android:title="Item"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+
+    <item
+        android:id="@+id/saveTlb"
+        android:title="SAVE INDIVIDUALS"
+        />
+
+    <item
+        android:id="@+id/loadTlb"
+        android:icon="@mipmap/list_icon"
+        android:title="LOAD INDIVIDUALS"
+        android:visible="true"
+        />
+</menu>
