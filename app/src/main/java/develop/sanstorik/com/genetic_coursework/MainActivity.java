@@ -1,10 +1,8 @@
 package develop.sanstorik.com.genetic_coursework;
 
 import android.content.Intent;
-import android.drm.DrmStore;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,8 +27,8 @@ import android.widget.Toast;
 
 import develop.sanstorik.com.genetic_coursework.database.AuthorizeUserDatabase;
 import develop.sanstorik.com.genetic_coursework.database.IndividualDatabase;
-import develop.sanstorik.com.genetic_coursework.genetic.GeneticAlgorithm;
-import develop.sanstorik.com.genetic_coursework.genetic.InterruptionSource;
+import develop.sanstorik.com.genetic_library.genetic.GeneticAlgorithm;
+import develop.sanstorik.com.genetic_library.genetic.InterruptionSource;
 import develop.sanstorik.com.genetic_coursework.listViewActivity.ListGeneticActivity;
 import develop.sanstorik.com.genetic_coursework.music_player.MusicPlayerService;
 

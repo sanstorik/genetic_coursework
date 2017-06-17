@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Locale;
 
 import develop.sanstorik.com.genetic_coursework.R;
-import develop.sanstorik.com.genetic_coursework.genetic.Individual;
-import develop.sanstorik.com.genetic_coursework.genetic.Population;
+import develop.sanstorik.com.genetic_library.genetic.Individual;
+import develop.sanstorik.com.genetic_library.genetic.Population;
 
 class PopulationAdapter extends ArrayAdapter<Population> {
 

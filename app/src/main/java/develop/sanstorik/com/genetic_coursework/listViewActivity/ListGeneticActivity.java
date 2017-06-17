@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import develop.sanstorik.com.genetic_coursework.R;
-import develop.sanstorik.com.genetic_coursework.genetic.GeneticResponse;
-import develop.sanstorik.com.genetic_coursework.genetic.Individual;
-import develop.sanstorik.com.genetic_coursework.genetic.Population;
+import develop.sanstorik.com.genetic_library.genetic.GeneticResponse;
+import develop.sanstorik.com.genetic_library.genetic.Individual;
+import develop.sanstorik.com.genetic_library.genetic.Population;
 import develop.sanstorik.com.genetic_coursework.graph_lib.GraphActivity;
 
 

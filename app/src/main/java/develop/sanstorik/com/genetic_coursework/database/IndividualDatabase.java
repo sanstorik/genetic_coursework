@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import develop.sanstorik.com.genetic_coursework.genetic.Individual;
+import develop.sanstorik.com.genetic_library.genetic.Individual;
 
 import static develop.sanstorik.com.genetic_coursework.database.IndividualReaderContract.IndividualEntry;
 

@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import develop.sanstorik.com.genetic_coursework.R;
-import develop.sanstorik.com.genetic_coursework.genetic.Individual;
+import develop.sanstorik.com.genetic_library.genetic.Individual;
 
 public class GraphView extends View {
 

@@ -1,4 +1,4 @@
-package develop.sanstorik.com.genetic_coursework.genetic;
+package develop.sanstorik.com.genetic_library.genetic;
 
 import android.os.Parcel;
 import android.os.Parcelable;
