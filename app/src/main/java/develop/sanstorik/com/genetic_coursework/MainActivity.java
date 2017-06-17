@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         chiki_briki_ID = soundPool.load(this, R.raw.chiki_briki_sound, 1);
         burn_ID = soundPool.load(this, R.raw.burn_sound, 2);
         fire_ID = soundPool.load(this, R.raw.fire_sound, 1);
-
     }
 
     //register = true -- log in = false

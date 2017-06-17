@@ -19,7 +19,7 @@ public class Notifications {
         this.service = service;
     }
 
-    public void createNotification(String title, String message){
+    void createNotification(String title, String message){
         Notification.Builder builder = getBuilder(title, message);
         context.registerReceiver(closeServiceBroadcast(), new IntentFilter("close"));
 

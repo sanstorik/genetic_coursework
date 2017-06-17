@@ -237,7 +237,7 @@ public class ListGeneticActivity extends AppCompatActivity {
 
                 if(objectOutputStream != null)
                     objectOutputStream.close();
-            } catch (IOException e) {/*EMPTRY*/}
+            } catch (IOException e) {/*EMPTY*/}
         }
     }
 

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/genetic_coursework.iml" filepath="$PROJECT_DIR$/genetic_coursework.iml" />
       <module fileurl="file://$PROJECT_DIR$/genetic_library/genetic_library.iml" filepath="$PROJECT_DIR$/genetic_library/genetic_library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/genetic_library/genetic_library.iml" filepath="$PROJECT_DIR$/genetic_library/genetic_library.iml" />
     </modules>
   </component>
 </project>
